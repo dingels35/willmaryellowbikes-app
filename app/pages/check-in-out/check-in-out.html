@@ -1,0 +1,37 @@
+<ion-navbar *navbar>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Check In / Check Out</ion-title>
+</ion-navbar>
+
+<ion-content padding class="getting-started">
+
+
+  <ion-card>
+    <ion-card-content>
+      <h3>Use this page to check in or check out a bike!</h3>
+
+
+      <select>
+        <option *ngFor='#i of locationOptions'>{{i}}</option>
+      </select>
+
+      <select>
+        <option *ngFor='#br of bikeRacks' value='br.id'>{{br.name}}</option>
+      </select>
+
+
+    <!--     <ion-list radio-group>
+
+          <ion-radio  value="a">
+            Rack at my location
+          </ion-radio>
+
+          <ion-radio  value="z">
+            Rack elsewhere
+          </ion-radio>
+        </ion-list> -->
+    </ion-card-content>
+  </ion-card>
+</ion-content>

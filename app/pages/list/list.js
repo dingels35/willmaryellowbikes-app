@@ -15,18 +15,18 @@ export class ListPage {
     'american-football', 'boat', 'bluetooth', 'build'];
 
     this.items = [];
-    for(let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+    // for(let i = 1; i < 11; i++) {
+    //   this.items.push({
+    //     title: 'Item ' + i,
+    //     note: 'This is item #' + i,
+    //     icon: this.icons[Math.floor(Math.random() * this.icons.length)]
+    //   });
+    // }
   }
 
-  itemTapped(event, item) {
-    this.nav.push(ListPage, {
-      item: item
-    })
-  }
+  // itemTapped(event, item) {
+  //   this.nav.push(ListPage, {
+  //     item: item
+  //   })
+  // }
 }

@@ -6,7 +6,20 @@
 </ion-navbar>
 
 <ion-content>
+
+  <ion-card>
+    <ion-card-content>
+      <h3>Hello</h3>
+      <p>** {{ icons }} **</p>
+      <ul>
+        <li *ngFor="#icon of icons">{{ icon }}</li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+
   <ion-list>
+
+
     <button ion-item *ngFor="#item of items" (click)="itemTapped($event, item)">
       <ion-icon [name]="item.icon" item-left></ion-icon>
       {{item.title}}

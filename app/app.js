@@ -3,13 +3,15 @@ import {App, IonicApp, Platform, Config} from 'ionic/ionic';
 import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {ListPage} from './pages/list/list';
 import {GridPage} from './pages/grid/grid';
-
+import {CheckInOutPage} from './pages/check-in-out/check-in-out'
 
 @App({
   templateUrl: 'build/app.html',
   // Check out the config API docs for more info
   // http://ionicframework.com/docs/v2/api/config/Config/
-  config: {}
+  config: {
+    mode: 'md'
+  }
 })
 class MyApp {
   constructor(app: IonicApp, platform: Platform) {
@@ -23,6 +25,7 @@ class MyApp {
       { title: 'Getting Started', component: GettingStartedPage },
       { title: 'List', component: ListPage },
       { title: 'Grid Icons', component: GridPage },
+      { title: 'Check In / Check Out', component: CheckInOutPage }
     ];
 
     this.rootPage = GettingStartedPage;
