@@ -17,11 +17,10 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.ts$/,
         loader: 'awesome-typescript',
         query: {
-          doTypeCheck: false,
-          useWebpackText: true
+          'doTypeCheck': false
         },
         include: path.resolve('app'),
         exclude: /node_modules/
@@ -41,9 +40,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'ionic': 'ionic-framework',
       'web-animations.min': path.normalize('ionic-framework/js/web-animations.min')
     },
-    extensions: ['', '.js']
+    extensions: ["", ".js", ".ts"]
   }
 };

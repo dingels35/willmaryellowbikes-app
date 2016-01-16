@@ -1,8 +1,5 @@
 {
   "compilerOptions": {
-    "allowNonTsExtensions": true,
-    "isolatedModules": true,
-    "noLib": true,
     "target": "ES5",
     "module": "commonjs",
     "noEmitOnError": false,
@@ -10,9 +7,13 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": false,
+    "sourceRoot": "",
     "inlineSourceMap": false,
     "inlineSources": false
   },
+  "files": [
+    "app/app.ts"
+  ],
   "exclude": [
     "node_modules"
   ],

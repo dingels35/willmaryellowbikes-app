@@ -1,4 +1,4 @@
-import {Page, NavController} from 'ionic/ionic';
+import {Page, NavController} from 'ionic-framework/ionic';
 import {NgForm} from 'angular2/common';
 import {CheckInOutModel} from './check-in-out-model';
 import {BikeRackService} from '../../services/bike-rack-service';
