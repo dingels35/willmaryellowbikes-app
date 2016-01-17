@@ -2,7 +2,7 @@
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
-  <ion-title>Check In / Check Out</ion-title>
+  <ion-title>Check {{ typeText() }}</ion-title>
 </ion-navbar>
 
 <ion-content padding class="getting-started">
@@ -12,13 +12,7 @@
     <form [ngFormModel]="frm" (submit)="save($event)">
 
       <ion-card-content>
-        <p>Checking bikes in and out helps us track where our bikes are.  Select the items below</p>
-
-        <ion-select ngControl='inOrOut'>
-          <ion-label>* Check in or check out?</ion-label>
-          <ion-option value='in'>Check in</ion-option>
-          <ion-option value='out'>Check out</ion-option>
-        </ion-select>
+        <p>Checking bikes {{ typeText() | lowercase }} helps us track where our bikes are.  Please select options below and click "CHECK {{ typeText() | uppercase }}".</p>
 
         <ion-select ngControl='bikeRackId'>
           <ion-label>* Select a bike rack</ion-label>
@@ -34,7 +28,7 @@
 
       <ion-item actions>
         <button clear item-left type="button" (click)='close()'>Cancel</button>
-        <button item-right type="submit">Submit</button>
+        <button item-right type="submit">Check {{ typeText() }}</button>
       </ion-item>
 
     </form>

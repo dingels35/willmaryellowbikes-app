@@ -3,7 +3,8 @@ import {App, IonicApp, Platform, Config} from 'ionic-framework/ionic';
 import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {ListPage} from './pages/list/list';
 import {GridPage} from './pages/grid/grid';
-import {CheckInOutPage} from './pages/check-in-out/check-in-out'
+import {CheckInPage} from './pages/check-in-out/check-in';
+import {CheckOutPage} from './pages/check-in-out/check-out';
 
 @App({
   templateUrl: 'build/app.html',
@@ -25,7 +26,8 @@ class MyApp {
       { title: 'Getting Started', component: GettingStartedPage },
       { title: 'List', component: ListPage },
       { title: 'Grid Icons', component: GridPage },
-      { title: 'Check In / Check Out', component: CheckInOutPage }
+      { title: 'Check In', component: CheckInPage },
+      { title: 'Check Out', component: CheckOutPage }
     ];
 
     this.rootPage = GettingStartedPage;

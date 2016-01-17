@@ -1,4 +1,4 @@
-import {Page, NavController, Alert} from 'ionic-framework/ionic';
+import {NavController, Alert} from 'ionic-framework/ionic';
 import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
 import {BikeRackService} from '../../services/bike-rack-service';
 import {BikeRack} from '../../models/bike-rack';
@@ -10,10 +10,6 @@ import {GettingStartedPage} from '../getting-started/getting-started';
 
 import "./check-in-out.scss";
 
-@Page({
-  templateUrl: '/build/pages/check-in-out/check-in-out.html',
-  providers: [BikeService, BikeRackService, StatusService]
-})
 export class CheckInOutPage {
   // services
   nav: NavController;
@@ -29,6 +25,7 @@ export class CheckInOutPage {
   // status variables
   isSubmitting: boolean;
   isSuccessful: boolean;
+  type: string;
 
   constructor(nav: NavController, bs: BikeService, brs: BikeRackService, fb: FormBuilder, ss:StatusService) {
     // save instances to object
@@ -46,16 +43,18 @@ export class CheckInOutPage {
     // set up form
     this.frm = fb.group({
       bikeId: [null],
-      bikeRackId: [null, Validators.required],
-      inOrOut: [null, Validators.required]
+      bikeRackId: [null, Validators.required]
     });
 
   }
 
   // public functions
+  typeText() {
+    return this.type.replace(/Check|Status/g,'');
+  }
 
   close(event) {
-    this.nav.push(GettingStartedPage);
+    this.nav.setRoot(GettingStartedPage);
   }
 
   save(event) {
@@ -63,9 +62,7 @@ export class CheckInOutPage {
 
     // show alert if errors exist
     if (!this.frm.valid) {
-      if  (this.inOrOutErrors().required) {
-        this.showError('You must select "Check In" or "Check Out".');
-      } else if (this.bikeRackIdErrors().required) {
+      if (this.bikeRackIdErrors().required) {
         this.showError('You must select a bike rack.');
       }
       return;
@@ -105,7 +102,8 @@ export class CheckInOutPage {
   }
 
   checkInOutFunction() {
-    return (this.frm.value.inOrOut == 'in') ? this.statusService.checkIn : this.statusService.checkOut;
+    if (this.type === 'CheckInStatus') return this.statusService.checkIn;
+    if (this.type === 'CheckOutStatus') return this.statusService.checkOut;
   }
 
   bikeRackIdErrors(): {} {
