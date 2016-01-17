@@ -1,25 +1,25 @@
 import {Injectable} from 'angular2/core';
 import {Http, Headers, HTTP_PROVIDERS} from 'angular2/http';
-import {BikeRack} from '../models/bike-rack';
+import {Bike} from '../models/bike';
 import {BaseService} from './base-service';
 import 'rxjs/add/operator/map';
 
 
 @Injectable()
-export class BikeRackService extends BaseService {
+export class BikeService extends BaseService {
 
   constructor(public http: Http) {
     super();
   }
 
   all() {
-    return this.http.get(this.url + '/api/bike_racks')
-      .map(res => res.json().bike_racks)
+    return this.http.get(this.url + '/api/bikes')
+      .map(res => res.json().bikes)
       .map((bikeRacks: Array<any>) => {
-        let result:Array<BikeRack> = [];
+        let result:Array<Bike> = [];
         if (bikeRacks) {
           bikeRacks.forEach((obj) => {
-            result.push(new BikeRack(obj));
+            result.push(new Bike(obj));
           });
         }
         return result;

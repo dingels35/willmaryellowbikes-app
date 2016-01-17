@@ -8,30 +8,44 @@
 <ion-content padding class="getting-started">
 
 
-  <ion-card>
-    <ion-card-content>
-      <h3>Use this page to check in or check out a bike!</h3>
+  <ion-card *ngIf='!isSuccessful'>
+    <form [ngFormModel]="frm" (submit)="save($event)">
 
+      <ion-card-content>
+        <p>Checking bikes in and out helps us track where our bikes are.  Select the items below</p>
 
-      <select>
-        <option *ngFor='#i of locationOptions'>{{i}}</option>
-      </select>
+        <ion-select ngControl='inOrOut'>
+          <ion-label>* Check in or check out?</ion-label>
+          <ion-option value='in'>Check in</ion-option>
+          <ion-option value='out'>Check out</ion-option>
+        </ion-select>
 
-      <select>
-        <option *ngFor='#br of bikeRacks' value='br.id'>{{br.name}}</option>
-      </select>
+        <ion-select ngControl='bikeRackId'>
+          <ion-label>* Select a bike rack</ion-label>
+          <ion-option *ngFor='#br of bikeRacks' [value]='br.id'>{{br.name}}</ion-option>
+        </ion-select>
 
+        <ion-select ngControl='bikeId'>
+          <ion-label>Choose a bike</ion-label>
+          <ion-option *ngFor='#b of bikes' [value]='b.id'>{{b.identifier}}</ion-option>
+        </ion-select>
 
-    <!--     <ion-list radio-group>
+      </ion-card-content>
 
-          <ion-radio  value="a">
-            Rack at my location
-          </ion-radio>
+      <ion-item actions>
+        <button clear item-left type="button" (click)='close()'>Cancel</button>
+        <button item-right type="submit">Submit</button>
+      </ion-item>
 
-          <ion-radio  value="z">
-            Rack elsewhere
-          </ion-radio>
-        </ion-list> -->
-    </ion-card-content>
+    </form>
   </ion-card>
+
+  <ion-card *ngIf='isSuccessful'>
+    <ion-card-header>Thank you!</ion-card-header>
+    <ion-card-content>We appreciate your helping tracking our bikes.</ion-card-content>
+    <ion-item actions>
+      <button item-right (click)='close()'>Close</button>
+    </ion-item>
+  </ion-card>
+
 </ion-content>
