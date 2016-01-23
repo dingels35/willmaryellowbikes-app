@@ -11,7 +11,7 @@ import {CheckOutPage} from './pages/check-in-out/check-out';
   // Check out the config API docs for more info
   // http://ionicframework.com/docs/v2/api/config/Config/
   config: {
-    mode: 'md'
+    // mode: 'md'
   }
 })
 class MyApp {

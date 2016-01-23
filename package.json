@@ -13,6 +13,15 @@
     "strip-sourcemap-loader": "0.0.1",
     "typescript": "^1.7.5"
   },
-  "name": "willmaryellowbikes-app",
-  "description": "willmaryellowbikes-app: An Ionic project"
+  "name": "Willmar Yellow Bikes",
+  "description": "Willmar Yellow Bikes - A free bike share program in Willmar, MN",
+  "cordovaPlugins": [
+    "cordova-plugin-device",
+    "cordova-plugin-console",
+    "cordova-plugin-whitelist",
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-statusbar",
+    "ionic-plugin-keyboard"
+  ],
+  "cordovaPlatforms": []
 }
