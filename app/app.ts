@@ -5,6 +5,7 @@ import {ListPage} from './pages/list/list';
 import {GridPage} from './pages/grid/grid';
 import {CheckInPage} from './pages/check-in-out/check-in';
 import {CheckOutPage} from './pages/check-in-out/check-out';
+import {AdoptRackPage} from './pages/adopt-rack/adopt-rack';
 
 @App({
   templateUrl: 'build/app.html',
@@ -27,7 +28,8 @@ class MyApp {
       { title: 'List', component: ListPage },
       { title: 'Grid Icons', component: GridPage },
       { title: 'Check In', component: CheckInPage },
-      { title: 'Check Out', component: CheckOutPage }
+      { title: 'Check Out', component: CheckOutPage },
+      { title: 'Adopt a Rack', component: AdoptRackPage }
     ];
 
     this.rootPage = GettingStartedPage;
