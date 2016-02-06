@@ -1,7 +1,5 @@
 import {NavController, Alert} from 'ionic-framework/ionic';
 import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
-import {BikeService} from '../../services/bike-service';
-import {Bike} from '../../models/bike';
 import {StatusService} from '../../services/status-service'
 import {Status} from '../../models/status';
 import {GettingStartedPage} from '../getting-started/getting-started';
@@ -25,7 +23,7 @@ export class CheckInOutPage {
   isSuccessful: boolean;
   type: string;
 
-  constructor(nav: NavController, bs: BikeService, fb: FormBuilder, ss:StatusService) {
+  constructor(nav: NavController, fb: FormBuilder, ss:StatusService) {
     // save instances to object
     this.nav = nav;
     this.statusService = ss;
@@ -33,9 +31,6 @@ export class CheckInOutPage {
     // initialize variables
     this.isSubmitting = false;
     this.isSuccessful = false;
-
-    // get bikes and bike racks
-    bs.all().subscribe(res => this.bikes = res);
 
     // set up form
     this.frm = fb.group({
