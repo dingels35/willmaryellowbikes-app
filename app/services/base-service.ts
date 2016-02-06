@@ -3,7 +3,7 @@ export class BaseService {
 
   constructor() {
     // this.url = 'http://lvh.me:3000';
-    this.url = 'http://willmaryellowbikes.herokuapp.com';
+    this.url = 'http://willmaryellowbikes.herokuapp.com/api/';
   }
 
 }

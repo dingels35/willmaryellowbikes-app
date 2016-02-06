@@ -13,7 +13,7 @@ export class BikeService extends BaseService {
   }
 
   all() {
-    return this.http.get(this.url + '/api/bikes')
+    return this.http.get(this.url + 'bikes')
       .map(res => res.json().bikes)
       .map((bikeRacks: Array<any>) => {
         let result:Array<Bike> = [];
@@ -23,6 +23,14 @@ export class BikeService extends BaseService {
           });
         }
         return result;
+      });
+  }
+
+  find(id: number) {
+    return this.http.get(this.url + 'bikes/' + id)
+      .map(res => res.json().bike)
+      .map((bike: any) => {
+        return new Bike(bike);
       });
   }
 

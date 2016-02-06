@@ -17,7 +17,7 @@ export class StatusService extends BaseService {
     let statusString = JSON.stringify({status: status});
     let headers = new Headers({'Content-Type': 'application/json'});
 
-    return this.http.post(this.url + '/api/statuses', statusString, {headers: headers})
+    return this.http.post(this.url + 'statuses', statusString, {headers: headers})
       .map(res => res.json());
   }
 
