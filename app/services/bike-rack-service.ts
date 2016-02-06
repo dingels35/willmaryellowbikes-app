@@ -13,7 +13,7 @@ export class BikeRackService extends BaseService {
   }
 
   all() {
-    return this.http.get(this.url + '/api/bike_racks')
+    return this.http.get(this.url + 'bike_racks')
       .map(res => res.json().bike_racks)
       .map((bikeRacks: Array<any>) => {
         let result:Array<BikeRack> = [];
@@ -23,6 +23,22 @@ export class BikeRackService extends BaseService {
           });
         }
         return result;
+      });
+  }
+
+  find(id: number) {
+    return this.http.get(this.url + 'bike_racks/' + id)
+      .map(res => res.json().bike_rack)
+      .map((bikeRack: any) => {
+        return new BikeRack(bikeRack);
+      });
+  }
+
+  closest(lat: number, long: number) {
+    return this.http.get(this.url + 'bike_racks/closest?lat=' + lat + '&long=' + long)
+      .map(res => res.json().bike_rack)
+      .map((bikeRack: any) => {
+        return new BikeRack(bikeRack);
       });
   }
 
