@@ -7,6 +7,7 @@ import {Bike} from '../../models/bike';
 import {StatusService} from '../../services/status-service'
 import {Status} from '../../models/status';
 import {GettingStartedPage} from '../getting-started/getting-started';
+import {BikeRackSelect} from '../../components/bike-rack-select';
 
 import "./check-in-out.scss";
 
@@ -27,7 +28,12 @@ export class CheckInOutPage {
   isSuccessful: boolean;
   type: string;
 
+  test: BikeRack;
+  test2: string;
+
   constructor(nav: NavController, bs: BikeService, brs: BikeRackService, fb: FormBuilder, ss:StatusService) {
+    this.test2 = 'hihihi';
+
     // save instances to object
     this.nav = nav;
     this.statusService = ss;
@@ -39,6 +45,8 @@ export class CheckInOutPage {
     // get bikes and bike racks
     brs.all().subscribe(res => this.bikeRacks = res);
     bs.all().subscribe(res => this.bikes = res);
+
+    brs.find(1).subscribe(res => this.test = res);
 
     // set up form
     this.frm = fb.group({
@@ -54,6 +62,7 @@ export class CheckInOutPage {
   }
 
   close(event) {
+    debugger;
     this.nav.setRoot(GettingStartedPage);
   }
 

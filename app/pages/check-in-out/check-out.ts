@@ -4,10 +4,12 @@ import {BikeRackService} from '../../services/bike-rack-service';
 import {BikeService} from '../../services/bike-service';
 import {StatusService} from '../../services/status-service'
 import {CheckInOutPage} from './check-in-out';
+import {BikeRackSelect} from '../../components/bike-rack-select';
 
 @Page({
   templateUrl: '/build/pages/check-in-out/check-in-out.html',
-  providers: [BikeService, BikeRackService, StatusService]
+  providers: [BikeService, BikeRackService, StatusService],
+  directives: [BikeRackSelect]
 })
 export class CheckOutPage extends CheckInOutPage {
   constructor(nav: NavController, bs: BikeService, brs: BikeRackService, fb: FormBuilder, ss:StatusService) {
