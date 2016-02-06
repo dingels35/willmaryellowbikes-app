@@ -7,6 +7,7 @@ import {BikeRack} from '../models/bike-rack';
 @Component({
   selector: 'bike-rack-select',
   directives: [Select, Item, Label, Option],
+  providers: [BikeRackService],
   template: `
     <ion-item>
       <ion-label>* Select a bike rack</ion-label>
@@ -18,6 +19,7 @@ import {BikeRack} from '../models/bike-rack';
 })
 export class BikeRackSelect {
   bikeRacks: Array<BikeRack>;
+  bikeRackService: BikeRackService;
 
   protected _value: number;
   @Input()
@@ -25,15 +27,30 @@ export class BikeRackSelect {
   set value(val) { this._value = val; this.onChange(val); }
 
   constructor(brs: BikeRackService, ngControl: NgControl) {
-    if (ngControl) {
-      ngControl.valueAccessor = this;
-    }
+    if (ngControl) { ngControl.valueAccessor = this; }
 
-    brs.all().subscribe(res => this.bikeRacks = res);
-    brs.closest(45, -95).subscribe(res => this.value = res.id);
+    this.bikeRackService = brs;
+    this.loadBikeRacks();
+    this.setByGeoLocation();
   }
 
+  private hasValue() { return (this.value && this.value.length > 0) true : false; }
 
+  private loadBikeRacks()  {
+    this.bikeRackService.all().subscribe(res => this.bikeRacks = res);
+  }
+
+  private setByGeoLocation() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      if (!this.hasValue()) {
+        this.bikeRackService.closest(position.coords.latitude, position.coords.longitude).subscribe((res) => {
+          if (!this.hasValue()) this.value = res.id;
+        });
+      }
+    });
+  }
+
+  // functions to implement ngControl
   onChange(val) {}
   onTouched(val) {}
   writeValue(val) { this._value = val; }
