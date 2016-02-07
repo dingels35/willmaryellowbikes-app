@@ -1,12 +1,9 @@
 import {NavController, Alert} from 'ionic-framework/ionic';
 import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
-import {BikeRackService} from '../../services/bike-rack-service';
-import {BikeRack} from '../../models/bike-rack';
-import {BikeService} from '../../services/bike-service';
-import {Bike} from '../../models/bike';
 import {StatusService} from '../../services/status-service'
 import {Status} from '../../models/status';
 import {GettingStartedPage} from '../getting-started/getting-started';
+import {BikeRackSelect} from '../../components/bike-rack-select';
 
 import "./check-in-out.scss";
 
@@ -17,7 +14,6 @@ export class CheckInOutPage {
 
   // drop down options
   bikes: Array<Bike>;
-  bikeRacks: Array<BikeRack>;
 
   // form elements
   frm: ControlGroup;
@@ -27,7 +23,7 @@ export class CheckInOutPage {
   isSuccessful: boolean;
   type: string;
 
-  constructor(nav: NavController, bs: BikeService, brs: BikeRackService, fb: FormBuilder, ss:StatusService) {
+  constructor(nav: NavController, fb: FormBuilder, ss:StatusService) {
     // save instances to object
     this.nav = nav;
     this.statusService = ss;
@@ -35,10 +31,6 @@ export class CheckInOutPage {
     // initialize variables
     this.isSubmitting = false;
     this.isSuccessful = false;
-
-    // get bikes and bike racks
-    brs.all().subscribe(res => this.bikeRacks = res);
-    bs.all().subscribe(res => this.bikes = res);
 
     // set up form
     this.frm = fb.group({
