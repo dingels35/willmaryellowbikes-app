@@ -8,7 +8,6 @@ import {BikeSelect} from '../../components/bike-select';
 
 @Page({
   templateUrl: '/build/pages/check-in-out/check-in-out.html',
-  providers: [StatusService],
   directives: [BikeRackSelect, BikeSelect]
 })
 export class CheckOutPage extends CheckInOutPage {

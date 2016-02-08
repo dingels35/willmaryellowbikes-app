@@ -1,6 +1,7 @@
 import {App, IonicApp, Platform, Config} from 'ionic-framework/ionic';
-
+import {AuthHttp} from 'angular2-jwt/angular2-jwt';
 import {GettingStartedPage} from './pages/getting-started/getting-started';
+import {LogInPage} from './pages/log-in/log-in';
 import {ListPage} from './pages/list/list';
 import {GridPage} from './pages/grid/grid';
 import {CheckInPage} from './pages/check-in-out/check-in';
@@ -9,6 +10,7 @@ import {AdoptRackPage} from './pages/adopt-rack/adopt-rack';
 
 @App({
   templateUrl: 'build/app.html',
+  providers: [AuthHttp],
   // Check out the config API docs for more info
   // http://ionicframework.com/docs/v2/api/config/Config/
   config: {
@@ -25,6 +27,7 @@ class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Getting Started', component: GettingStartedPage },
+      { title: 'Log In', component: LogInPage },
       { title: 'List', component: ListPage },
       { title: 'Grid Icons', component: GridPage },
       { title: 'Check In', component: CheckInPage },
