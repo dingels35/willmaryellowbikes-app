@@ -4,6 +4,9 @@ import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {LogInPage} from './pages/log-in/log-in';
 import {ListPage} from './pages/list/list';
 import {GridPage} from './pages/grid/grid';
+
+// https://angular.io/docs/ts/latest/api/core/Type-interface.html
+import {Type} from 'angular2/core';
 import {CheckInPage} from './pages/check-in-out/check-in';
 import {CheckOutPage} from './pages/check-in-out/check-out';
 import {AdoptRackPage} from './pages/adopt-rack/adopt-rack';
@@ -18,10 +21,10 @@ import {AdoptRackPage} from './pages/adopt-rack/adopt-rack';
   }
 })
 class MyApp {
-  constructor(app: IonicApp, platform: Platform) {
-    this.app = app;
-    this.platform = platform;
+  rootPage: Type = GettingStartedPage;
+  pages: Array<{title: string, component: Type}>
 
+  constructor(private app: IonicApp, private platform: Platform) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -35,7 +38,6 @@ class MyApp {
       { title: 'Adopt a Rack', component: AdoptRackPage }
     ];
 
-    this.rootPage = GettingStartedPage;
   }
 
   initializeApp() {
