@@ -1,19 +1,25 @@
 import {App, IonicApp, Platform, Config} from 'ionic-framework/ionic';
-import {AuthHttp} from 'angular2-jwt/angular2-jwt';
+import {AuthHttp, AuthConfig} from 'angular2-jwt/angular2-jwt';
+import {provide, Type} from 'angular2/core';
+import {Http} from 'angular2/http';
+
+// pages
 import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {LogInPage} from './pages/log-in/log-in';
 import {ListPage} from './pages/list/list';
 import {GridPage} from './pages/grid/grid';
-
-// https://angular.io/docs/ts/latest/api/core/Type-interface.html
-import {Type} from 'angular2/core';
 import {CheckInPage} from './pages/check-in-out/check-in';
 import {CheckOutPage} from './pages/check-in-out/check-out';
 import {AdoptRackPage} from './pages/adopt-rack/adopt-rack';
 
 @App({
   templateUrl: 'build/app.html',
-  providers: [AuthHttp],
+  providers: [
+    provide(AuthHttp, {
+      useFactory: (http) => new AuthHttp(new AuthConfig(), http),
+      deps: [Http]
+    })
+  ],
   // Check out the config API docs for more info
   // http://ionicframework.com/docs/v2/api/config/Config/
   config: {
@@ -27,7 +33,6 @@ class MyApp {
   constructor(private app: IonicApp, private platform: Platform) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Getting Started', component: GettingStartedPage },
       { title: 'Log In', component: LogInPage },
