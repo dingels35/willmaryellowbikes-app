@@ -16,7 +16,7 @@ import {AdoptRackPage} from './pages/adopt-rack/adopt-rack';
   templateUrl: 'build/app.html',
   providers: [
     provide(AuthHttp, {
-      useFactory: (http) => new AuthHttp(new AuthConfig(), http),
+      useFactory: (http) => new AuthHttp(new AuthConfig({noJwtError: true}), http),
       deps: [Http]
     })
   ],
