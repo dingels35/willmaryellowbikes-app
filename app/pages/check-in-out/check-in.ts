@@ -4,11 +4,12 @@ import {StatusService} from '../../services/status-service'
 import {CheckInOutPage} from './check-in-out';
 import {BikeRackSelect} from '../../components/bike-rack-select';
 import {BikeSelect} from '../../components/bike-select';
+import {WybMenu} from '../../components/wyb-menu';
 
 @Page({
   templateUrl: '/build/pages/check-in-out/check-in-out.html',
   providers: [StatusService],
-  directives: [BikeRackSelect, BikeSelect]
+  directives: [BikeRackSelect, BikeSelect, WybMenu]
 })
 export class CheckInPage extends CheckInOutPage {
   constructor(nav: NavController, fb: FormBuilder, ss:StatusService) {
