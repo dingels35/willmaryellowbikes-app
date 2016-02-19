@@ -14,7 +14,6 @@ import {JwtHelper} from 'angular2-jwt';
 })
 export class CheckOutPage extends CheckInOutPage {
   constructor(nav: NavController, fb: FormBuilder, ss:StatusService, x:JwtHelper) {
-    debugger;
     super(nav, fb, ss);
     this.type = 'CheckOutStatus';
   }

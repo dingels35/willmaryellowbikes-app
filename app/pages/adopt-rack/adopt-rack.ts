@@ -1,4 +1,4 @@
-import {Page, NavController} from 'ionic-framework/ionic';
+import {Page} from 'ionic-framework/ionic';
 import {WybNavbar} from '../../components/wyb-navbar';
 
 @Page({
@@ -6,8 +6,7 @@ import {WybNavbar} from '../../components/wyb-navbar';
   directives: [WybNavbar]
 })
 export class AdoptRackPage {
-  constructor(nav: NavController) {
-
+  constructor() {
   }
 
 }

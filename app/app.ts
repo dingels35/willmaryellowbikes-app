@@ -3,6 +3,8 @@ import {AuthHttp, AuthConfig} from 'angular2-jwt/angular2-jwt';
 import {provide, Type} from 'angular2/core';
 import {Http} from 'angular2/http';
 
+import {AuthorizationService} from './services/authorization-service';
+
 // pages
 import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {LogInPage} from './pages/log-in/log-in';
@@ -15,6 +17,7 @@ import {AdoptRackPage} from './pages/adopt-rack/adopt-rack';
 @App({
   templateUrl: 'build/app.html',
   providers: [
+    AuthorizationService,
     provide(AuthHttp, {
       useFactory: (http) => new AuthHttp(new AuthConfig({noJwtError: true}), http),
       deps: [Http]
@@ -28,21 +31,16 @@ import {AdoptRackPage} from './pages/adopt-rack/adopt-rack';
 })
 class MyApp {
   rootPage: Type = GettingStartedPage;
-  pages: Array<{title: string, component: Type}>
+  private pageMap = {
+    'AdoptRackPage': AdoptRackPage,
+    'CheckInPage': CheckInPage,
+    'CheckOutPage': CheckOutPage,
+    'GettingStartedPage': GettingStartedPage,
+    'LogInPage': LogInPage,
+  }
 
-  constructor(private app: IonicApp, private platform: Platform) {
+  constructor(private app: IonicApp, private platform: Platform, public authorizationService: AuthorizationService) {
     this.initializeApp();
-
-    this.pages = [
-      { title: 'Getting Started', component: GettingStartedPage },
-      { title: 'Log In', component: LogInPage },
-      { title: 'List', component: ListPage },
-      { title: 'Grid Icons', component: GridPage },
-      { title: 'Check In', component: CheckInPage },
-      { title: 'Check Out', component: CheckOutPage },
-      { title: 'Adopt a Rack', component: AdoptRackPage }
-    ];
-
   }
 
   initializeApp() {
@@ -68,9 +66,7 @@ class MyApp {
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    let nav = this.app.getComponent('nav');
-    nav.setRoot(page.component);
+    let page = this.pageMap[page.component];
+    this.app.getComponent('nav').setRoot(page);
   }
 }
