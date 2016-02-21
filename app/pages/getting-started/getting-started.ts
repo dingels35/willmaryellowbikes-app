@@ -1,10 +1,10 @@
 import {Page, NavController} from 'ionic-framework/ionic';
-import {WybMenu} from '../../components/wyb-menu';
+import {WybNavbar} from '../../components/wyb-navbar';
 
 
 @Page({
   templateUrl: 'build/pages/getting-started/getting-started.html',
-  directives: [WybMenu]
+  directives: [WybNavbar]
 })
 export class GettingStartedPage {
 
