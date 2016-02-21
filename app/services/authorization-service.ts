@@ -12,6 +12,8 @@ export class AuthorizationService {
       { title: 'Getting Started', component: 'GettingStartedPage' },
       { title: 'Check In', component: 'CheckInPage' },
       { title: 'Check Out', component: 'CheckOutPage' },
+      { title: 'Report Abandoned', component: 'ReportAbandonedPage' },
+      { title: 'Report Broken', component: 'ReportBrokenPage' },
       { title: 'Adopt a Rack', component: 'AdoptRackPage' }
     ];
     this.preLoginPages = [

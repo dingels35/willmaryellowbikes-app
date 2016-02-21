@@ -13,6 +13,8 @@ import {GridPage} from './pages/grid/grid';
 import {CheckInPage} from './pages/check-in-out/check-in';
 import {CheckOutPage} from './pages/check-in-out/check-out';
 import {AdoptRackPage} from './pages/adopt-rack/adopt-rack';
+import {ReportAbandonedPage} from './pages/report-abandoned/report-abandoned';
+import {ReportBrokenPage} from './pages/report-broken/report-broken';
 
 @App({
   templateUrl: 'build/app.html',
@@ -36,7 +38,9 @@ class MyApp {
     'CheckInPage': CheckInPage,
     'CheckOutPage': CheckOutPage,
     'GettingStartedPage': GettingStartedPage,
-    'LogInPage': LogInPage,
+    'ReportAbandonedPage': ReportAbandonedPage,
+    'ReportBrokenPage': ReportBrokenPage,
+    'LogInPage': LogInPage
   }
 
   constructor(private app: IonicApp, private platform: Platform, public authorizationService: AuthorizationService) {
