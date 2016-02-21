@@ -8,8 +8,6 @@ import {AuthorizationService} from './services/authorization-service';
 // pages
 import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {LogInPage} from './pages/log-in/log-in';
-import {ListPage} from './pages/list/list';
-import {GridPage} from './pages/grid/grid';
 import {CheckInPage} from './pages/check-in-out/check-in';
 import {CheckOutPage} from './pages/check-in-out/check-out';
 import {AdoptRackPage} from './pages/adopt-rack/adopt-rack';
