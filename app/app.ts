@@ -9,6 +9,8 @@ import {Type} from 'angular2/core';
 import {CheckInPage} from './pages/check-in-out/check-in';
 import {CheckOutPage} from './pages/check-in-out/check-out';
 import {AdoptRackPage} from './pages/adopt-rack/adopt-rack';
+import {ReportAbandonedPage} from './pages/report-abandoned/report-abandoned';
+import {ReportBrokenPage} from './pages/report-broken/report-broken';
 
 @App({
   templateUrl: 'build/app.html',
@@ -32,6 +34,8 @@ class MyApp {
       { title: 'Grid Icons', component: GridPage },
       { title: 'Check In', component: CheckInPage },
       { title: 'Check Out', component: CheckOutPage },
+      { title: 'Report Abandoned', component: ReportAbandonedPage },
+      { title: 'Report Broken', component: ReportBrokenPage },
       { title: 'Adopt a Rack', component: AdoptRackPage }
     ];
 
