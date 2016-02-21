@@ -1,5 +1,6 @@
 import {Injectable} from 'angular2/core';
-import {Http, Headers, HTTP_PROVIDERS} from 'angular2/http';
+import {Headers} from 'angular2/http';
+import {AuthHttp} from 'angular2-jwt';
 import {BaseService} from './base-service';
 import {Status} from '../models/status';
 import 'rxjs/add/operator/map';
@@ -8,7 +9,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class StatusService extends BaseService {
 
-  constructor(public http: Http) {
+  constructor(public http: AuthHttp) {
     super();
   }
 

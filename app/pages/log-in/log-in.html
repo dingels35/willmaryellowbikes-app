@@ -1,0 +1,17 @@
+<wyb-navbar>Log In</wyb-navbar>
+
+<ion-content padding class="getting-started">
+
+  <div *ngIf='!hasLoggedIn'>
+    <h3>Log In</h3>
+    <p>Log in with your google account below.</p>
+    <button type="button" (click)='logIn()'>Log In</button>
+  </div>
+
+  <div *ngIf='hasLoggedIn'>
+    <h3>Thank you!</h3>
+    <p>Log in successful.</p>
+    <button type="button" (click)='goHome()'>Return Home</button>
+  </div>
+  
+</ion-content>
