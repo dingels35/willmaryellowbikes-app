@@ -2,7 +2,6 @@ import {AuthHttp} from 'angular2-jwt/angular2-jwt';
 import {Page, NavController} from 'ionic-framework/ionic';
 import {WybNavbar} from '../../components/wyb-navbar';
 import {AuthorizationService} from '../../services/authorization-service'
-import {GettingStartedPage} from '../getting-started/getting-started';
 
 @Page({
   templateUrl: 'build/pages/log-in/log-in.html',
@@ -16,7 +15,7 @@ export class LogInPage {
   constructor(public auth: AuthorizationService, public nav: NavController) { }
 
   goHome() {
-    this.nav.setRoot(GettingStartedPage);
+    this.nav.pop();
   }
 
   logIn() {
@@ -38,7 +37,7 @@ export class LogInPage {
       vm.auth.setActivePages();
 
       // show thank you
-      vm.hasLoggedIn = true;     
+      vm.hasLoggedIn = true;
 
     });
   }

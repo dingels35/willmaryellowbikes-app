@@ -2,16 +2,23 @@
 
 <ion-content padding class="getting-started">
 
-  <div *ngIf='!hasLoggedIn'>
-    <h3>Log In</h3>
-    <p>Log in with your google account below.</p>
-    <button type="button" (click)='logIn()'>Log In</button>
-  </div>
+  <ion-card *ngIf='!hasLoggedIn'>
+    <ion-card-content>
+      <p>Logging in allows us to credit you with any information you provide with this app.</p>
+    </ion-card-content>
+    <ion-item actions>
+      <button item-right type="button" (click)='logIn()'>Log In</button>
+    </ion-item>
+  </ion-card>
 
-  <div *ngIf='hasLoggedIn'>
-    <h3>Thank you!</h3>
-    <p>Log in successful.</p>
-    <button type="button" (click)='goHome()'>Return Home</button>
-  </div>
-  
+  <ion-card *ngIf='hasLoggedIn'>
+    <ion-card-header>Thank you!</ion-card-header>
+    <ion-card-content>
+      <p>Log in successful.</p>
+    </ion-card-content>
+    <ion-item actions>
+      <button item-right type="button" (click)='goHome()'>Return Home</button>
+    </ion-item>
+  </ion-card>
+
 </ion-content>

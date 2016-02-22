@@ -69,6 +69,6 @@ class MyApp {
 
   openPage(page) {
     let page = this.pageMap[page.component];
-    this.app.getComponent('nav').setRoot(page);
+    this.app.getComponent('nav').push(page);
   }
 }

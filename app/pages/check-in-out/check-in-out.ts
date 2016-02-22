@@ -2,7 +2,6 @@ import {NavController, Alert} from 'ionic-framework/ionic';
 import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
 import {StatusService} from '../../services/status-service'
 import {Status} from '../../models/status';
-import {GettingStartedPage} from '../getting-started/getting-started';
 import {BikeRackSelect} from '../../components/bike-rack-select';
 
 import "./check-in-out.scss";
@@ -46,7 +45,7 @@ export class CheckInOutPage {
   }
 
   close(event) {
-    this.nav.setRoot(GettingStartedPage);
+    this.nav.pop();
   }
 
   save(event) {
