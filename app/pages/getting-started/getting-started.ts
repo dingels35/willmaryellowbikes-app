@@ -1,15 +1,39 @@
 import {Page, NavController} from 'ionic-framework/ionic';
+import {Type} from 'angular2/core';
 import {WybNavbar} from '../../components/wyb-navbar';
+import {WybPageIcon} from '../../components/wyb-page-icon';
 
+import {AdoptRackPage} from '../adopt-rack/adopt-rack';
+import {CheckInPage} from '../check-in-out/check-in';
+import {CheckOutPage} from '../check-in-out/check-out';
+import {LogInPage} from '../log-in/log-in';
+import {ReportAbandonedPage} from '../report-abandoned/report-abandoned';
+import {ReportBrokenPage} from '../report-broken/report-broken';
 
 @Page({
   templateUrl: 'build/pages/getting-started/getting-started.html',
-  directives: [WybNavbar]
+  directives: [WybNavbar, WybPageIcon]
 })
 export class GettingStartedPage {
+  public adoptRackPage: Type;
+  public checkInPage: Type;
+  public checkOutPage: Type;
+  public logInPage: Type;
+  public reportAbandonedPage: Type;
+  public reportBrokenPage: Type;
 
-  constructor(nav: NavController) {
 
+  constructor(public nav: NavController) {
+    this.adoptRackPage = AdoptRackPage;
+    this.checkInPage = CheckInPage;
+    this.checkOutPage = CheckOutPage;
+    this.logInPage = LogInPage;
+    this.reportAbandonedPage = ReportAbandonedPage;
+    this.reportBrokenPage = ReportBrokenPage;
+  }
+
+  goTo(page) {
+    this.nav.push(page);
   }
 
 }

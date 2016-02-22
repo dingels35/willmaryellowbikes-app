@@ -1,0 +1,44 @@
+@font-face {
+    font-family: 'wybicon';
+    src:
+        url('/fonts/wybicon.ttf?tpd5s5') format('truetype'),
+        url('/fonts/wybicon.woff?tpd5s5') format('woff'),
+        url('/fonts/wybicon.svg?tpd5s5#wybicon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+i {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'wybicon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.wybicon-cyclist-helmet:before {
+    content: "\e901";
+}
+.wybicon-man-riding-a-bicycle:before {
+    content: "\e902";
+}
+.wybicon-time-for-bicycle-exercise:before {
+    content: "\e903";
+}
+.wybicon-bicycle-pin:before {
+    content: "\e904";
+}
+.wybicon-bicycle-sprockets:before {
+    content: "\e905";
+}
+.wybicon-bicycle-parked:before {
+    content: "\e900";
+}
+
