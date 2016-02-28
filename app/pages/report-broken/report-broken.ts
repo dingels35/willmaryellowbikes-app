@@ -1,6 +1,6 @@
 import {Page, NavController, Alert} from 'ionic-framework/ionic';
-
 import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
+import {WybNavbar} from '../../components/wyb-navbar';
 
 import {StatusService} from '../../services/status-service'
 import {Status} from '../../models/status';
@@ -14,7 +14,7 @@ import {BikeSelect} from '../../components/bike-select';
 @Page({
   templateUrl: 'build/pages/report-broken/report-broken.html',
   providers: [StatusService],
-  directives: [BikeRackSelect, BikeSelect]
+  directives: [BikeRackSelect, BikeSelect, WybNavbar]
 })
 export class ReportBrokenPage {
   // services

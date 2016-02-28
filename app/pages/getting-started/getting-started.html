@@ -1,20 +1,28 @@
-
-<ion-navbar *navbar>
-  <button menuToggle>
-    <ion-icon name="menu"></ion-icon>
-  </button>
-  <ion-title>Getting Started</ion-title>
-</ion-navbar>
-
+<wyb-navbar>Willmar Yellow Bikes</wyb-navbar>
 
 <ion-content padding class="getting-started">
-
-  <h3>Getting Started</h3>
-  <p>
-     Get it started!
-  </p>
-  <p>
-    <button primary menuToggle>Toggle Menu</button>
-  </p>
-
+  <ion-row>
+     <ion-col width-50>
+       <wyb-page-icon [icon]="'wybicon-man-riding-a-bicycle'" (click)='goTo(checkOutPage)'>Check Out</wyb-page-icon>
+     </ion-col>
+     <ion-col width-50>
+       <wyb-page-icon [icon]="'wybicon-time-for-bicycle-exercise'" (click)='goTo(checkInPage)'>Check In</wyb-page-icon>
+     </ion-col>
+  </ion-row>
+  <ion-row>
+     <ion-col width-50>
+       <wyb-page-icon [icon]="'wybicon-bicycle-pin'" (click)='goTo(reportAbandonedPage)'>Abandoned<br />Bike</wyb-page-icon>
+     </ion-col>
+     <ion-col width-50>
+       <wyb-page-icon [icon]="'wybicon-bicycle-sprockets'" (click)='goTo(reportBrokenPage)'>Broken<br />Bike</wyb-page-icon>
+     </ion-col>
+  </ion-row>
+  <ion-row>
+     <ion-col width-50>
+       <wyb-page-icon [icon]="'wybicon-bicycle-parked'" (click)='goTo(adoptRackPage)'>Adopt A Rack</wyb-page-icon>
+     </ion-col>
+     <ion-col width-50 *ngIf='!auth.isAuthenticated()'>
+       <wyb-page-icon [icon]="'wybicon-cyclist-helmet'"  (click)='goTo(logInPage)'>Log In</wyb-page-icon>
+     </ion-col>
+  </ion-row>
 </ion-content>

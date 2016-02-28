@@ -20,8 +20,11 @@
 // Both iOS and MD colors can be further customized if colors
 // are different per mode.
 
+$yellow: #fddc03;
+$gray: #333;
+
 $colors: (
-  primary:    #fddc03, //#387ef5,
+  primary:    $yellow, //#387ef5,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f99, //#f4f4f4,
@@ -29,5 +32,18 @@ $colors: (
   favorite:   #69BB7B
 );
 
-$toolbar-background-color:   #666;
-$toolbar-text-color:         #fddc03;
+$background-color:           $yellow;
+$text-color:                 #fff;
+
+$list-background-color:      $gray;
+
+$toolbar-background:         $gray;
+$toolbar-text-color:         $yellow;
+$toolbar-md-text-color:      $toolbar-text-color;
+$toolbar-md-button-color:    $yellow;
+
+$card-ios-header-color:      $yellow;
+$card-md-header-color:       $yellow;
+$card-ios-text-color:        $text-color;
+$card-md-text-color:         $text-color;
+
