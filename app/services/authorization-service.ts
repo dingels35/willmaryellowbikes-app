@@ -1,23 +1,23 @@
 import {tokenNotExpired} from 'angular2-jwt';
 
 export class AuthorizationService {
-  private pages: Array<{title: string, component: string}>;
-  private adminPages: Array<{title: string, component: string}>;
-  private preLoginPages: Array<{title: string, component: string}>;
-  public activePages: Array<{title: string, component: string}>;
+  private pages: Array<{title: string, component: string, icon: string}>;
+  private adminPages: Array<{title: string, component: string, icon: string}>;
+  private preLoginPages: Array<{title: string, component: string, icon: string}>;
+  public activePages: Array<{title: string, component: string, icon: string}>;
 
 
   constructor() {
     this.pages = [
-      { title: 'Getting Started', component: 'GettingStartedPage' },
-      { title: 'Check In', component: 'CheckInPage' },
-      { title: 'Check Out', component: 'CheckOutPage' },
-      { title: 'Report Abandoned', component: 'ReportAbandonedPage' },
-      { title: 'Report Broken', component: 'ReportBrokenPage' },
-      { title: 'Adopt a Rack', component: 'AdoptRackPage' }
+      // { title: 'Home',              component: 'GettingStartedPage' },
+      { title: 'Check Out',         component: 'CheckOutPage',        icon: 'wybicon-man-riding-a-bicycle' },
+      { title: 'Check In',          component: 'CheckInPage',         icon: 'wybicon-time-for-bicycle-exercise' },
+      { title: 'Report Abandoned',  component: 'ReportAbandonedPage', icon: 'wybicon-bicycle-pin' },
+      { title: 'Report Broken',     component: 'ReportBrokenPage',    icon: 'wybicon-bicycle-sprockets' },
+      { title: 'Adopt a Rack',      component: 'AdoptRackPage',       icon: 'wybicon-bicycle-parked' }
     ];
     this.preLoginPages = [
-      { title: 'Log In', component: 'LogInPage' },
+      { title: 'Log In',            component: 'LogInPage',           icon: 'wybicon-cyclist-helmet' },
     ]
 
     this.setActivePages();
