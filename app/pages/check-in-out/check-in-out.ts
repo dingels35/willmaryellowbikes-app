@@ -4,15 +4,10 @@ import {StatusService} from '../../services/status-service'
 import {Status} from '../../models/status';
 import {BikeRackSelect} from '../../components/bike-rack-select';
 
-import "./check-in-out.scss";
-
 export class CheckInOutPage {
   // services
   nav: NavController;
   statusService: StatusService;
-
-  // drop down options
-  bikes: Array<Bike>;
 
   // form elements
   frm: ControlGroup;

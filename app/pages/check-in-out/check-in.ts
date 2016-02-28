@@ -7,7 +7,7 @@ import {BikeSelect} from '../../components/bike-select';
 import {WybNavbar} from '../../components/wyb-navbar';
 
 @Page({
-  templateUrl: '/build/pages/check-in-out/check-in-out.html',
+  templateUrl: 'build/pages/check-in-out/check-in-out.html',
   providers: [StatusService],
   directives: [BikeRackSelect, BikeSelect, WybNavbar]
 })
