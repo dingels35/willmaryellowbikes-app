@@ -21,7 +21,7 @@
      <ion-col width-50>
        <wyb-page-icon [icon]="'wybicon-bicycle-parked'" (click)='goTo(adoptRackPage)'>Adopt A Rack</wyb-page-icon>
      </ion-col>
-     <ion-col width-50>
+     <ion-col width-50 *ngIf='!auth.isAuthenticated()'>
        <wyb-page-icon [icon]="'wybicon-cyclist-helmet'"  (click)='goTo(logInPage)'>Log In</wyb-page-icon>
      </ion-col>
   </ion-row>

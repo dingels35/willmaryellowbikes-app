@@ -1,7 +1,10 @@
 import {AuthHttp} from 'angular2-jwt/angular2-jwt';
 import {Page, NavController} from 'ionic-framework/ionic';
+import {NgZone} from 'angular2/core';
 import {WybNavbar} from '../../components/wyb-navbar';
 import {AuthorizationService} from '../../services/authorization-service'
+
+declare var Auth0Lock: any;
 
 @Page({
   templateUrl: 'build/pages/log-in/log-in.html',
@@ -12,7 +15,9 @@ export class LogInPage {
   lock: Auth0Lock = new Auth0Lock('nlCX5QpwjRbWT5ATwDigu0kwsTikjha0', 'willmaryellowbikes.auth0.com');
   public hasLoggedIn: boolean = false;
 
-  constructor(public auth: AuthorizationService, public nav: NavController) { }
+  constructor(public auth: AuthorizationService, public nav: NavController, private _ngZone: NgZone) {
+    this.hasLoggedIn = auth.isAuthenticated();
+   }
 
   goHome() {
     this.nav.pop();
@@ -37,7 +42,7 @@ export class LogInPage {
       vm.auth.setActivePages();
 
       // show thank you
-      vm.hasLoggedIn = true;
+      vm._ngZone.run(() => {  vm.hasLoggedIn = true; });
 
     });
   }

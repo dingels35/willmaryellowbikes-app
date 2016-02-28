@@ -10,8 +10,11 @@ import {LogInPage} from '../log-in/log-in';
 import {ReportAbandonedPage} from '../report-abandoned/report-abandoned';
 import {ReportBrokenPage} from '../report-broken/report-broken';
 
+import {AuthorizationService} from '../../services/authorization-service'
+
 @Page({
   templateUrl: 'build/pages/getting-started/getting-started.html',
+  providers: [AuthorizationService],
   directives: [WybNavbar, WybPageIcon]
 })
 export class GettingStartedPage {
@@ -23,7 +26,7 @@ export class GettingStartedPage {
   public reportBrokenPage: Type;
 
 
-  constructor(public nav: NavController) {
+  constructor(public nav: NavController, public auth: AuthorizationService) {
     this.adoptRackPage = AdoptRackPage;
     this.checkInPage = CheckInPage;
     this.checkOutPage = CheckOutPage;

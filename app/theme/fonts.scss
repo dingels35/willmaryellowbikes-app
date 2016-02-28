@@ -1,14 +1,14 @@
 @font-face {
     font-family: 'wybicon';
     src:
-        url('/fonts/wybicon.ttf?tpd5s5') format('truetype'),
-        url('/fonts/wybicon.woff?tpd5s5') format('woff'),
-        url('/fonts/wybicon.svg?tpd5s5#wybicon') format('svg');
+        url('../../fonts/wybicon.ttf?tpd5s5') format('truetype'),
+        url('../../fonts/wybicon.woff?tpd5s5') format('woff'),
+        url('../../fonts/wybicon.svg?tpd5s5#wybicon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
-i {
+i.wybicon {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'wybicon' !important;
     speak: none;
