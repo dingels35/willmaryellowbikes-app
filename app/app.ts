@@ -1,3 +1,5 @@
+/// <reference path="../node_modules/angular2/typings/browser.d.ts" />
+
 import {App, IonicApp, Platform, Config} from 'ionic-framework/ionic';
 import {AuthHttp, AuthConfig} from 'angular2-jwt/angular2-jwt';
 import {provide, Type} from 'angular2/core';
