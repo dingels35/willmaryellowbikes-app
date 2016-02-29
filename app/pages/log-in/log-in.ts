@@ -8,7 +8,7 @@ declare var Auth0Lock: any;
 
 @Page({
   templateUrl: 'build/pages/log-in/log-in.html',
-  prividers: [AuthorizationService],
+  providers: [AuthorizationService],
   directives: [WybNavbar]
 })
 export class LogInPage {
