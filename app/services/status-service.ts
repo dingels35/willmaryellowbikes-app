@@ -31,7 +31,7 @@ export class StatusService extends BaseService {
   }
 
   public reportBroken = (bikeRackId: number, bikeId?: number, brokenDescription: string) => {
-    return this.create('ReportBrokenStatus', bikeRackId, bikeId, brokenDescription);
+    return this.create('BrokenStatus', bikeRackId, bikeId, brokenDescription);
   }
 
 }
