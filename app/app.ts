@@ -70,7 +70,7 @@ class MyApp {
   }
 
   openPage(page) {
-    let page = this.pageMap[page.component];
-    this.app.getComponent('nav').push(page);
+    let p = this.pageMap[page.component];
+    this.app.getComponent('nav').push(p);
   }
 }
