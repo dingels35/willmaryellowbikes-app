@@ -13,7 +13,7 @@ export class Status {
   updated_at: string;
   bike_count: number;
 
-  constructor(params?: {}) {
+  constructor(params?) {
     this.id = params.id;
     this.type = params.type;
     this.bike_id = params.bike_id;

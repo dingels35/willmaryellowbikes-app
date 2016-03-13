@@ -34,7 +34,7 @@ export class BikeRackSelect {
     this.setByGeoLocation();
   }
 
-  private hasValue() { return (this.value && this.value.length > 0) ? true : false; }
+  private hasValue() { return (this.value) ? true : false; }
 
   private loadBikeRacks()  {
     this.bikeRackService.all().subscribe(res => this.bikeRacks = res);

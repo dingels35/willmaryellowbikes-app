@@ -92,11 +92,11 @@ export class CheckInOutPage {
     if (this.type === 'CheckOutStatus') return this.statusService.checkOut;
   }
 
-  bikeRackIdErrors(): {} {
+  bikeRackIdErrors() {
     return this.frm.controls.bikeRackId.errors || {};
   }
 
-  inOrOutErrors(): {} {
+  inOrOutErrors() {
     return this.frm.controls.inOrOut.errors || {};
   }
 
