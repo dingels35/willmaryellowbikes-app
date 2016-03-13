@@ -1,4 +1,4 @@
-import {Page, NavController} from 'ionic-framework/ionic';
+import {Page, NavController} from 'ionic-angular';
 import {Type} from 'angular2/core';
 import {WybNavbar} from '../../components/wyb-navbar';
 import {WybPageIcon} from '../../components/wyb-page-icon';

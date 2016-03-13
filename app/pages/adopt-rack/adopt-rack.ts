@@ -1,4 +1,4 @@
-import {Page} from 'ionic-framework/ionic';
+import {Page} from 'ionic-angular';
 import {WybNavbar} from '../../components/wyb-navbar';
 
 @Page({

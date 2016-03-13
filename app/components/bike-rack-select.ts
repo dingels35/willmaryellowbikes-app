@@ -1,6 +1,6 @@
 import {Component, Input} from 'angular2/core';
 import {NgControl} from 'angular2/common';
-import {Select, Item, Label, Option} from 'ionic-framework/ionic';
+import {Select, Item, Label, Option} from 'ionic-angular';
 import {BikeRackService} from '../services/bike-rack-service';
 import {BikeRack} from '../models/bike-rack';
 
