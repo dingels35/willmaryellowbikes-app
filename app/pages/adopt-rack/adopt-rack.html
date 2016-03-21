@@ -1,13 +1,49 @@
 
-<wyb-navbar>Adopt a Rack</wyb-navbar>
+<wyb-navbar>Track a Rack</wyb-navbar>
 
-<ion-content padding class="getting-started">
+<ion-content padding class="adopt-rack">
+
+  <ion-card *ngIf='!isSuccessful'>
+    <form [ngFormModel]="frm" (submit)="save($event)">
+
+      <ion-card-content>
+        <p>Help us keep track of where the bikes are by reporting the number of bikes in a rack.</p>
+        <bike-rack-select ngControl='bikeRackId' [ng-change]="onBikeRackIdChange()"></bike-rack-select>
+        <ion-item>
+          <ion-label floating>Bike count</ion-label>
+          <ion-input type="tel" ngControl='bikeCount'></ion-input>
+        </ion-item>
+      </ion-card-content>
+
+      <ion-item actions>
+        <button clear item-left type="button" (click)='close()'>Cancel</button>
+        <button item-right type="submit">Submit</button>
+      </ion-item>
+
+    </form>
+  </ion-card>
+
+  <ion-card *ngIf='isSuccessful'>
+    <ion-card-header>Thank you!</ion-card-header>
+    <ion-card-content>Your help is vital to maintaining the yellow bike program.</ion-card-content>
+    <ion-item actions>
+      <button item-right (click)='close()'>Close</button>
+    </ion-item>
+  </ion-card>
+
   <ion-card>
-    <ion-card-content>
-      <p>
-        TODO: Make this page work!
-      </p>
-    </ion-card-content>
+    <ion-card-header>Track a rack history</ion-card-header>
+    <ion-card-content *ngIf='statusHistoryLoading' text-center><i>Loading</i></ion-card-content>
+    <ion-card-content *ngIf='!frm.controls.bikeRackId.value' text-center><i>Select a rack above</i></ion-card-content>
+    <ion-card-content *ngIf='frm.controls.bikeRackId.value && statusHistory && statusHistory.length == 0'>No history</ion-card-content>
+    <ion-list *ngIf='statusHistory'>
+      <ion-item *ngFor='#status of statusHistory'>
+        <h3>{{ status.created_at }}</h3>
+        <h3 item-right>{{ status.bike_count }}</h3>
+      </ion-item>
+    </ion-list>
   </ion-card>
 
 </ion-content>
+
+
