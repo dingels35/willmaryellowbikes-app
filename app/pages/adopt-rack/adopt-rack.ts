@@ -1,20 +1,25 @@
-import {Page} from 'ionic-angular';
-import {WybNavbar} from '../../components/wyb-navbar';
-import {NavController, Alert} from 'ionic-angular';
 import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
-import {StatusService} from '../../services/status-service'
+import {ChangeDetectorRef} from 'angular2/core';
+import {CalendarPipe} from 'angular2-moment';
+import {Page} from 'ionic-angular';
+import {NavController, Alert} from 'ionic-angular';
+
 import {BikeRackSelect} from '../../components/bike-rack-select';
+import {WybNavbar} from '../../components/wyb-navbar';
 import {Status} from '../../models/status'
+import {StatusService} from '../../services/status-service'
 
 @Page({
   templateUrl: 'build/pages/adopt-rack/adopt-rack.html',
   providers: [StatusService],
-  directives: [BikeRackSelect, WybNavbar]
+  directives: [BikeRackSelect, WybNavbar],
+  pipes: [CalendarPipe]
 })
 export class AdoptRackPage {
   // services
   nav: NavController;
   statusService: StatusService;
+  cdr: ChangeDetectorRef;
 
   // form elements
   frm: ControlGroup;
@@ -28,10 +33,11 @@ export class AdoptRackPage {
   statusHistoryBikeRackId: number;
   statusHistoryLoading: boolean;
 
-  constructor(nav: NavController, fb: FormBuilder, ss:StatusService) {
+  constructor(nav: NavController, fb: FormBuilder, ss:StatusService, cdr: ChangeDetectorRef) {
     // save instances to object
     this.nav = nav;
     this.statusService = ss;
+    this.cdr = cdr;
 
     // initialize variables
     this.isSubmitting = false;
@@ -42,6 +48,7 @@ export class AdoptRackPage {
       bikeRackId: [null, Validators.required],
       bikeCount: [null, Validators.required]
     });
+
   }
 
 
@@ -57,7 +64,7 @@ export class AdoptRackPage {
       if (this.bikeRackIdErrors().required) {
         this.showError('You must select a bike rack.');
       }
-      if (this.numBikesErrors().required) {
+      if (this.bikeCountErrors().required) {
         this.showError('You must enter the number of bikes.');
       }
       return;
@@ -83,6 +90,7 @@ export class AdoptRackPage {
     // call backs
     function success(resp, t) {
       t.isSuccessful = true;
+      t.statusHistory.push(resp);
     }
     function error(err, t) {
      t.showError("There was an error submitting your request.");
@@ -93,10 +101,13 @@ export class AdoptRackPage {
     }
   }
 
+  bikeCountErrors() {
+    return this.frm.controls.bikeCount.errors || {};
+  }
+
   bikeRackIdErrors() {
     return this.frm.controls.bikeRackId.errors || {};
   }
-
 
   getRackHistory(rackId: number) {
     // this.statusHistory = null;
@@ -106,6 +117,7 @@ export class AdoptRackPage {
       err => error(err, this),
       () => fin(this)
     );
+    this.cdr.detectChanges(); // not sure why this is necessary, but it is to prevent this error: http://stackoverflow.com/questions/34364880/expression-has-changed-after-it-was-checked
 
     function success(resp, t) {
       t.statusHistory = resp;
@@ -126,11 +138,6 @@ export class AdoptRackPage {
       this.getRackHistory(this.statusHistoryBikeRackId);
     }
 
-  }
-
-  numBikesErrors() {
-    this.statusHistoryBikeRackId
-    return this.frm.controls.numBikes.errors || {};
   }
 
   showError(message: string) {

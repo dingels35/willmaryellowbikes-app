@@ -38,7 +38,7 @@
     <ion-card-content *ngIf='frm.controls.bikeRackId.value && statusHistory && statusHistory.length == 0'>No history</ion-card-content>
     <ion-list *ngIf='statusHistory'>
       <ion-item *ngFor='#status of statusHistory'>
-        <h3>{{ status.created_at }}</h3>
+        <h3>{{ status.created_at | amCalendar }}</h3>
         <h3 item-right>{{ status.bike_count }}</h3>
       </ion-item>
     </ion-list>

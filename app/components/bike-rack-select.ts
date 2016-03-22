@@ -10,8 +10,8 @@ import {BikeRack} from '../models/bike-rack';
   providers: [BikeRackService],
   template: `
     <ion-item>
-      <ion-label>* Select a bike rack</ion-label>
-      <ion-select [(ngModel)]="_value" (change)='onChange(value)'>
+      <ion-label>* {{ label }}</ion-label>
+      <ion-select [(ngModel)]="_value" (change)='onChange(value)' [disabled]='isLoadingBikeRacks || isLoadingNearest'>
         <ion-option *ngFor='#br of bikeRacks' [value]='br.id'>{{br.name}}</ion-option>
       </ion-select>
     </ion-item>
@@ -20,6 +20,9 @@ import {BikeRack} from '../models/bike-rack';
 export class BikeRackSelect {
   bikeRacks: Array<BikeRack>;
   bikeRackService: BikeRackService;
+  public isLoadingBikeRacks: boolean;
+  public isLoadingNearest: boolean;
+  label: string;
 
   protected _value: number;
   @Input()
@@ -32,22 +35,44 @@ export class BikeRackSelect {
     this.bikeRackService = brs;
     this.loadBikeRacks();
     this.setByGeoLocation();
+    this.setLabel();
   }
 
   private hasValue() { return (this.value) ? true : false; }
 
   private loadBikeRacks()  {
-    this.bikeRackService.all().subscribe(res => this.bikeRacks = res);
+    this.isLoadingBikeRacks = true;
+    this.bikeRackService.all().subscribe(res => {
+      this.bikeRacks = res;
+      this.isLoadingBikeRacks = false;
+      this.setLabel();
+    });
   }
 
   private setByGeoLocation() {
+    this.isLoadingNearest = true;
     navigator.geolocation.getCurrentPosition((position) => {
       if (!this.hasValue()) {
         this.bikeRackService.closest(position.coords.latitude, position.coords.longitude).subscribe((res) => {
           if (!this.hasValue()) this.value = res.id;
+          this.isLoadingNearest = false;
+          this.setLabel();
         });
+      } else {
+        this.isLoadingNearest = false;
+        this.setLabel();
       }
     });
+  }
+
+  private setLabel() {
+    if (this.isLoadingBikeRacks) {
+      this.label = 'Loading bike racks ...';
+    } else if (this.isLoadingNearest) {
+      this.label = 'Finding nearest bike rack ...';
+    } else {
+      this.label = 'Select a bike rack';
+    }
   }
 
   // functions to implement ngControl
