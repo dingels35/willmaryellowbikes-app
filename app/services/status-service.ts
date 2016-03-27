@@ -1,6 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {Headers, URLSearchParams} from 'angular2/http';
-import {AuthHttp} from 'angular2-jwt';
+import {AuthHttp} from '../vendor/angular2-jwt/angular2-jwt';
 import {BaseService} from './base-service';
 import {Status} from '../models/status';
 import 'rxjs/add/operator/map';

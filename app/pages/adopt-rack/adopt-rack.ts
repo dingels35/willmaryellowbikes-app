@@ -1,6 +1,6 @@
 import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
 import {ChangeDetectorRef} from 'angular2/core';
-import {CalendarPipe} from 'angular2-moment';
+import {CalendarPipe} from '../../vendor/angular2-moment/CalendarPipe';
 import {Page} from 'ionic-angular';
 import {NavController, Alert} from 'ionic-angular';
 

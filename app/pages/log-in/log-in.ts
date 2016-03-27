@@ -1,4 +1,3 @@
-import {AuthHttp} from 'angular2-jwt/angular2-jwt';
 import {Page, NavController} from 'ionic-angular';
 import {NgZone} from 'angular2/core';
 import {WybNavbar} from '../../components/wyb-navbar';
