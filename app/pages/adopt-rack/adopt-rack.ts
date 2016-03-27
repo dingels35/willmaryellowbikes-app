@@ -1,8 +1,7 @@
 import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
 import {ChangeDetectorRef} from 'angular2/core';
 import {CalendarPipe} from '../../vendor/angular2-moment/CalendarPipe';
-import {Page} from 'ionic-angular';
-import {NavController, Alert} from 'ionic-angular';
+import {Page, NavController, Alert} from 'ionic-angular';
 
 import {BikeRackSelect} from '../../components/bike-rack-select';
 import {WybNavbar} from '../../components/wyb-navbar';

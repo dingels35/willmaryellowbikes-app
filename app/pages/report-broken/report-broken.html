@@ -2,7 +2,6 @@
 
 <ion-content padding class="getting-started">
 
-  <h3>Report a Broken Bike</h3>
 
   <ion-card *ngIf='!isSuccessful'>
     <form [ngFormModel]="frm" (submit)="save($event)">
@@ -12,7 +11,6 @@
            <a (click)="goTo(reportAbandonedPage)">Report Abandoned</a> page.</p>
         <bike-rack-select ngControl='bikeRackId'></bike-rack-select>
         <bike-select ngControl='bikeId'></bike-select>
-        <p>TODO: Add checkboxes for tires/wheels, chain, brakes, seat</p>
         <ion-item>
           <ion-textarea ngControl="brokenDescription" placeholder="What seems to be the problem?"></ion-textarea>
         </ion-item>

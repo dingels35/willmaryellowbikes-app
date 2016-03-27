@@ -1,15 +1,13 @@
-import {Page, NavController, Alert} from 'ionic-framework/ionic';
 import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
-import {WybNavbar} from '../../components/wyb-navbar';
-
-import {StatusService} from '../../services/status-service'
-import {Status} from '../../models/status';
-
-import {GettingStartedPage} from '../getting-started/getting-started';
-import {ReportAbandonedPage} from '../report-abandoned/report-abandoned';
+import {Page, NavController, Alert} from 'ionic-angular';
 
 import {BikeRackSelect} from '../../components/bike-rack-select';
 import {BikeSelect} from '../../components/bike-select';
+import {Status} from '../../models/status';
+import {StatusService} from '../../services/status-service'
+import {WybNavbar} from '../../components/wyb-navbar';
+import {ReportAbandonedPage} from '../report-abandoned/report-abandoned';
+
 
 @Page({
   templateUrl: 'build/pages/report-broken/report-broken.html',
@@ -20,9 +18,6 @@ export class ReportBrokenPage {
   // services
   nav: NavController;
   statusService: StatusService;
-
-  // drop down options
-  bikes: Array<Bike>;
 
   // form elements
   frm: ControlGroup;
@@ -53,7 +48,7 @@ export class ReportBrokenPage {
   }
 
   close(event) {
-    this.nav.setRoot(GettingStartedPage);
+    this.nav.pop();
   }
 
   save(event) {
@@ -107,11 +102,11 @@ console.log("fin!");
     return this.statusService.reportBroken;
   }
 
-  bikeRackIdErrors(): {} {
+  bikeRackIdErrors() {
     return this.frm.controls.bikeRackId.errors || {};
   }
 
-  brokenErrors(): {} {
+  brokenErrors() {
     return this.frm.controls.broken.errors || {};
   }
 
