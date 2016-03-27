@@ -1,4 +1,4 @@
-import {Page, NavController} from 'ionic-framework/ionic';
+import {Page, NavController} from 'ionic-angular';
 import {FormBuilder} from 'angular2/common';
 import {StatusService} from '../../services/status-service'
 import {CheckInOutPage} from './check-in-out';

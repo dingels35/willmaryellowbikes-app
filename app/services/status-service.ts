@@ -1,6 +1,6 @@
 import {Injectable} from 'angular2/core';
-import {Headers} from 'angular2/http';
-import {AuthHttp} from 'angular2-jwt';
+import {Headers, URLSearchParams} from 'angular2/http';
+import {AuthHttp} from '../vendor/angular2-jwt/angular2-jwt';
 import {BaseService} from './base-service';
 import {Status} from '../models/status';
 import 'rxjs/add/operator/map';
@@ -13,8 +13,8 @@ export class StatusService extends BaseService {
     super();
   }
 
-  public create = (type: string, bikeRackId: number, bikeId: number) => {
-    let status = { type: type, bike_rack_id: bikeRackId, bike_id: bikeId };
+  // public create = (type: string, bikeRackId: number, bikeId: number) => {
+  public create = (status: Status) => {
     let statusString = JSON.stringify({status: status});
     let headers = new Headers({'Content-Type': 'application/json'});
 
@@ -22,12 +22,43 @@ export class StatusService extends BaseService {
       .map(res => res.json());
   }
 
+  private where = (qs: any) => {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let params = new URLSearchParams();
+    for (var key in qs) {
+      params.set(key, qs[key]);
+    }
+
+    return this.http.get(this.url + 'statuses', { headers: headers, search: params })
+      .map(res => res.json().statuses)
+      .map((statuses: Array<any>) => {
+        let result:Array<Status> = [];
+        if (statuses) {
+          statuses.forEach((obj) => {
+            result.push(new Status(obj));
+          });
+        }
+        return result;
+      });
+  }
+
   public checkIn = (bikeRackId: number, bikeId?: number) => {
-    return this.create('CheckInStatus', bikeRackId, bikeId);
+    let status = new Status({ type: 'CheckInStatus', bike_rack_id: bikeRackId, bike_id: bikeId });
+    return this.create(status);
   }
 
   public checkOut = (bikeRackId: number, bikeId?: number) => {
-    return this.create('CheckOutStatus', bikeRackId, bikeId);
+    let status = new Status({ type: 'CheckOutStatus', bike_rack_id: bikeRackId, bike_id: bikeId });
+    return this.create(status);
+  }
+
+  public bikeCount = (bikeRackId: number, bikeCount: number) => {
+    let status = new Status({ type: 'BikeCountStatus', bike_rack_id: bikeRackId, bike_count: bikeCount });
+    return this.create(status);
+  }
+
+  public bikeCountHistory = (bikeRackId: number) => {
+    return this.where({ bike_rack_id: bikeRackId, limit: 10, scope: 'bike_count' })
   }
 
   public reportBroken = (bikeRackId: number, bikeId?: number, brokenDescription: string) => {

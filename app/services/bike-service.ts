@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {AuthHttp} from 'angular2-jwt';
+import {AuthHttp} from '../vendor/angular2-jwt/angular2-jwt';
 import {Bike} from '../models/bike';
 import {BaseService} from './base-service';
 import 'rxjs/add/operator/map';

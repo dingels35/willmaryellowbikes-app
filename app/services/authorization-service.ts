@@ -1,4 +1,4 @@
-import {tokenNotExpired} from 'angular2-jwt';
+import {tokenNotExpired} from '../vendor/angular2-jwt/angular2-jwt';
 
 export class AuthorizationService {
   private pages: Array<{title: string, component: string, icon: string}>;

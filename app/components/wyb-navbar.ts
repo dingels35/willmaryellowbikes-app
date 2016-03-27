@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {IONIC_DIRECTIVES} from 'ionic-framework/ionic';
+import {IONIC_DIRECTIVES} from 'ionic-angular';
 
 
 @Component({

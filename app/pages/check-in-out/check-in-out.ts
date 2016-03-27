@@ -1,4 +1,4 @@
-import {NavController, Alert} from 'ionic-framework/ionic';
+import {NavController, Alert} from 'ionic-angular';
 import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
 import {StatusService} from '../../services/status-service'
 import {Status} from '../../models/status';
@@ -92,11 +92,11 @@ export class CheckInOutPage {
     if (this.type === 'CheckOutStatus') return this.statusService.checkOut;
   }
 
-  bikeRackIdErrors(): {} {
+  bikeRackIdErrors() {
     return this.frm.controls.bikeRackId.errors || {};
   }
 
-  inOrOutErrors(): {} {
+  inOrOutErrors() {
     return this.frm.controls.inOrOut.errors || {};
   }
 
