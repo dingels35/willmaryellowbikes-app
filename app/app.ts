@@ -6,6 +6,7 @@ import {provide, Type} from 'angular2/core';
 import {Http} from 'angular2/http';
 
 import {AuthorizationService} from './services/authorization-service';
+import {GpsService} from './services/gps-service';
 
 // pages
 import {GettingStartedPage} from './pages/getting-started/getting-started';
@@ -20,6 +21,7 @@ import {ReportBrokenPage} from './pages/report-broken/report-broken';
   templateUrl: 'build/app.html',
   providers: [
     AuthorizationService,
+    GpsService,
     provide(AuthHttp, {
       useFactory: (http) => new AuthHttp(new AuthConfig({noJwtError: true}), http),
       deps: [Http]
@@ -43,13 +45,13 @@ class MyApp {
     'LogInPage': LogInPage
   }
 
-  constructor(private app: IonicApp, private platform: Platform, public authorizationService: AuthorizationService) {
+  constructor(private app: IonicApp, private platform: Platform, public authorizationService: AuthorizationService, public gpsService: GpsService) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      console.log('Platform ready');
+      // console.log('Platform ready');
 
       // The platform is now ready. Note: if this callback fails to fire, follow
       // the Troubleshooting guide for a number of possible solutions:

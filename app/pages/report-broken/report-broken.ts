@@ -73,9 +73,7 @@ export class ReportBrokenPage {
     if (this.isSubmitting) { return; }
     this.isSubmitting = true;
 
-console.log("report broken, rack="+this.frm.value.bikeRackId+", id="+this.frm.value.bikeId+", description="+this.frm.value.brokenDescription);
-
-    this.reportBrokenFunction()(this.frm.value.bikeRackId, this.frm.value.bikeId, this.frm.value.brokenDescription)
+    this.statusService.reportBroken(this.frm.value.bikeRackId, this.frm.value.bikeId, this.frm.value.brokenDescription)
       .subscribe(
         resp => success(resp, this),
         err => error(err, this),
@@ -85,21 +83,13 @@ console.log("report broken, rack="+this.frm.value.bikeRackId+", id="+this.frm.va
     // callbacks
     function success(resp, t) {
       t.isSuccessful = true;
-fin(t); // is this call needed?
     }
     function error(err, t) {
-console.log("Submission error:");console.log(err);
       t.showError("There was an error submitting your request.");
-      fin(t);
     }
     function fin(t) {
       t.isSubmitting = false;
-console.log("fin!");
     }
-  }
-
-  reportBrokenFunction() {
-    return this.statusService.reportBroken;
   }
 
   bikeRackIdErrors() {

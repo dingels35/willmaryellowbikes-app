@@ -1,8 +1,33 @@
 <wyb-navbar>Report Abandoned Bike</wyb-navbar>
-
 <ion-content padding class="getting-started">
-  <h3>Report an Abandoned Bike</h3>
-  <p>
-     TODO: Make this page work!
-  </p>
+
+  <ion-card *ngIf='!isSuccessful'>
+    <form [ngFormModel]="frm" (submit)="save($event)">
+      <ion-card-content>
+        <p>
+          Reporting bikes that have been abandoned helps keep the bikes in places that they can be used.
+          Please select options below and click "REPORT ABANDONED".
+        </p>
+
+        <bike-location-select ngControl='location'></bike-location-select>
+        <ion-item *ngIf="frm.controls.location.value === 'somewhereelse'">
+          <ion-textarea ngControl="locationDescription" placeholder="Decribe where bike is located"></ion-textarea>
+        </ion-item>
+        <bike-select ngControl='bikeId'></bike-select>
+      </ion-card-content>
+      <ion-item actions>
+        <button clear item-left type="button" (click)='close()'>Cancel</button>
+        <button item-right type="submit">Report Abandoned</button>
+      </ion-item>
+    </form>
+  </ion-card>
+
+  <ion-card *ngIf='isSuccessful'>
+    <ion-card-header>Thank you!</ion-card-header>
+    <ion-card-content>We appreciate your help tracking our bikes.</ion-card-content>
+    <ion-item actions>
+      <button item-right (click)='close()'>Close</button>
+    </ion-item>
+  </ion-card>
+
 </ion-content>

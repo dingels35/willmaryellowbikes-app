@@ -89,7 +89,7 @@ export class AdoptRackPage {
     // call backs
     function success(resp, t) {
       t.isSuccessful = true;
-      t.statusHistory.push(resp);
+      t.statusHistory.unshift(resp);
     }
     function error(err, t) {
      t.showError("There was an error submitting your request.");
@@ -101,11 +101,11 @@ export class AdoptRackPage {
   }
 
   bikeCountErrors() {
-    return this.frm.controls.bikeCount.errors || {};
+    return this.frm.controls['bikeCount'].errors || {};
   }
 
   bikeRackIdErrors() {
-    return this.frm.controls.bikeRackId.errors || {};
+    return this.frm.controls['bikeRackId'].errors || {};
   }
 
   getRackHistory(rackId: number) {
@@ -131,9 +131,8 @@ export class AdoptRackPage {
   }
 
   onBikeRackIdChange() {
-    if (this.frm.controls.bikeRackId.value && this.frm.controls.bikeRackId.value != this.statusHistoryBikeRackId  ) {
-      console.log("onBikeRackIdChange", this.frm.controls.bikeRackId.value);
-      this.statusHistoryBikeRackId = this.frm.controls.bikeRackId.value
+    if (this.frm.controls['bikeRackId'].value && this.frm.controls['bikeRackId'].value != this.statusHistoryBikeRackId  ) {
+      this.statusHistoryBikeRackId = this.frm.controls['bikeRackId'].value
       this.getRackHistory(this.statusHistoryBikeRackId);
     }
 
