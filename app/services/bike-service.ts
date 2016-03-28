@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {Http, Headers, HTTP_PROVIDERS} from 'angular2/http';
+import {AuthHttp} from '../vendor/angular2-jwt/angular2-jwt';
 import {Bike} from '../models/bike';
 import {BaseService} from './base-service';
 import 'rxjs/add/operator/map';
@@ -8,12 +8,12 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class BikeService extends BaseService {
 
-  constructor(public http: Http) {
+  constructor(public http: AuthHttp) {
     super();
   }
 
   all() {
-    return this.http.get(this.url + '/api/bikes')
+    return this.http.get(this.url + 'bikes')
       .map(res => res.json().bikes)
       .map((bikeRacks: Array<any>) => {
         let result:Array<Bike> = [];
@@ -23,6 +23,14 @@ export class BikeService extends BaseService {
           });
         }
         return result;
+      });
+  }
+
+  find(id: number) {
+    return this.http.get(this.url + 'bikes/' + id)
+      .map(res => res.json().bike)
+      .map((bike: any) => {
+        return new Bike(bike);
       });
   }
 

@@ -1,23 +1,13 @@
-import {NavController, Alert} from 'ionic-framework/ionic';
+import {NavController, Alert} from 'ionic-angular';
 import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
-import {BikeRackService} from '../../services/bike-rack-service';
-import {BikeRack} from '../../models/bike-rack';
-import {BikeService} from '../../services/bike-service';
-import {Bike} from '../../models/bike';
 import {StatusService} from '../../services/status-service'
 import {Status} from '../../models/status';
-import {GettingStartedPage} from '../getting-started/getting-started';
-
-import "./check-in-out.scss";
+import {BikeRackSelect} from '../../components/bike-rack-select';
 
 export class CheckInOutPage {
   // services
   nav: NavController;
   statusService: StatusService;
-
-  // drop down options
-  bikes: Array<Bike>;
-  bikeRacks: Array<BikeRack>;
 
   // form elements
   frm: ControlGroup;
@@ -27,7 +17,7 @@ export class CheckInOutPage {
   isSuccessful: boolean;
   type: string;
 
-  constructor(nav: NavController, bs: BikeService, brs: BikeRackService, fb: FormBuilder, ss:StatusService) {
+  constructor(nav: NavController, fb: FormBuilder, ss:StatusService) {
     // save instances to object
     this.nav = nav;
     this.statusService = ss;
@@ -35,10 +25,6 @@ export class CheckInOutPage {
     // initialize variables
     this.isSubmitting = false;
     this.isSuccessful = false;
-
-    // get bikes and bike racks
-    brs.all().subscribe(res => this.bikeRacks = res);
-    bs.all().subscribe(res => this.bikes = res);
 
     // set up form
     this.frm = fb.group({
@@ -54,7 +40,7 @@ export class CheckInOutPage {
   }
 
   close(event) {
-    this.nav.setRoot(GettingStartedPage);
+    this.nav.pop();
   }
 
   save(event) {
@@ -106,11 +92,11 @@ export class CheckInOutPage {
     if (this.type === 'CheckOutStatus') return this.statusService.checkOut;
   }
 
-  bikeRackIdErrors(): {} {
+  bikeRackIdErrors() {
     return this.frm.controls.bikeRackId.errors || {};
   }
 
-  inOrOutErrors(): {} {
+  inOrOutErrors() {
     return this.frm.controls.inOrOut.errors || {};
   }
 

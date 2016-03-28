@@ -1,9 +1,4 @@
-<ion-navbar *navbar>
-  <button menuToggle>
-    <ion-icon name="menu"></ion-icon>
-  </button>
-  <ion-title>Check {{ typeText() }}</ion-title>
-</ion-navbar>
+<wyb-navbar>Check {{ typeText() }}</wyb-navbar>
 
 <ion-content padding class="getting-started">
 
@@ -13,17 +8,8 @@
 
       <ion-card-content>
         <p>Checking bikes {{ typeText() | lowercase }} helps us track where our bikes are.  Please select options below and click "CHECK {{ typeText() | uppercase }}".</p>
-
-        <ion-select ngControl='bikeRackId'>
-          <ion-label>* Select a bike rack</ion-label>
-          <ion-option *ngFor='#br of bikeRacks' [value]='br.id'>{{br.name}}</ion-option>
-        </ion-select>
-
-        <ion-select ngControl='bikeId'>
-          <ion-label>Choose a bike</ion-label>
-          <ion-option *ngFor='#b of bikes' [value]='b.id'>{{b.identifier}}</ion-option>
-        </ion-select>
-
+        <bike-rack-select ngControl='bikeRackId'></bike-rack-select>
+        <bike-select ngControl='bikeId'></bike-select>
       </ion-card-content>
 
       <ion-item actions>
