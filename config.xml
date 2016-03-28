@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.willmaryellowbikes" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.willmaryellowbikes" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Yellow Bikes</name>
   <description>An app to manage the Yellow Bike program in Willmar, MN.</description>
   <author email="dingels35@gmail.com">Cory Dingels</author>
