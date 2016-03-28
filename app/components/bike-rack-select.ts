@@ -1,6 +1,7 @@
 import {Component, Input} from 'angular2/core';
 import {NgControl} from 'angular2/common';
 import {Select, Item, Label, Option} from 'ionic-angular';
+import {GpsService} from '../services/gps-service';
 import {BikeRackService} from '../services/bike-rack-service';
 import {BikeRack} from '../models/bike-rack';
 
@@ -20,6 +21,7 @@ import {BikeRack} from '../models/bike-rack';
 export class BikeRackSelect {
   bikeRacks: Array<BikeRack>;
   bikeRackService: BikeRackService;
+  gpsService: GpsService;
   public isLoadingBikeRacks: boolean;
   public isLoadingNearest: boolean;
   label: string;
@@ -29,12 +31,12 @@ export class BikeRackSelect {
   get value() { return this._value; }
   set value(val) { this._value = val; this.onChange(val); }
 
-  constructor(brs: BikeRackService, ngControl: NgControl) {
+  constructor(brs: BikeRackService, ngControl: NgControl, gps: GpsService) {
     if (ngControl) { ngControl.valueAccessor = this; }
 
     this.bikeRackService = brs;
+    this.gpsService = gps;
     this.loadBikeRacks();
-    this.setByGeoLocation();
     this.setLabel();
   }
 
@@ -44,6 +46,7 @@ export class BikeRackSelect {
     this.isLoadingBikeRacks = true;
     this.bikeRackService.all().subscribe(res => {
       this.bikeRacks = res;
+      this.setByGeoLocation();
       this.isLoadingBikeRacks = false;
       this.setLabel();
     });
@@ -51,18 +54,25 @@ export class BikeRackSelect {
 
   private setByGeoLocation() {
     this.isLoadingNearest = true;
-    navigator.geolocation.getCurrentPosition((position) => {
-      if (!this.hasValue()) {
-        this.bikeRackService.closest(position.coords.latitude, position.coords.longitude).subscribe((res) => {
-          if (!this.hasValue()) this.value = res.id;
-          this.isLoadingNearest = false;
-          this.setLabel();
-        });
+    let _this = this;
+
+    this.gpsService.promise.then(function() {
+      if (!_this.hasValue()) {
+        _this.bikeRackService.closest(_this.gpsService.latitude, _this.gpsService.longitude).subscribe(
+          (res) => { if (!_this.hasValue()) _this.value = res.id; },
+          (err) => { console.log(err); },
+          finalize
+       );
       } else {
-        this.isLoadingNearest = false;
-        this.setLabel();
+        finalize();
       }
     });
+
+    function finalize() {
+      _this.isLoadingNearest = false;
+      _this.setLabel();
+    }
+
   }
 
   private setLabel() {

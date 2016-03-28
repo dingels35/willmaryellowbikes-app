@@ -1,8 +1,31 @@
 <wyb-navbar>Report Broken Bike</wyb-navbar>
-
 <ion-content padding class="getting-started">
-  <h3>Report a Broken Bike</h3>
-  <p>
-     TODO: Make this page work!
-  </p>
+
+  <ion-card *ngIf='!isSuccessful'>
+    <form [ngFormModel]="frm" (submit)="save($event)">
+      <ion-card-content>
+        <p>Reporting bikes in need of repair helps us keep the bikes usable. Please select options
+           below and click "REPORT BROKEN". If the broken bike is not at a rack, please use the
+           <a (click)="goTo(reportAbandonedPage)">Report Abandoned</a> page.</p>
+        <bike-rack-select ngControl='bikeRackId'></bike-rack-select>
+        <bike-select ngControl='bikeId'></bike-select>
+        <ion-item>
+          <ion-textarea ngControl="brokenDescription" placeholder="What seems to be the problem?"></ion-textarea>
+        </ion-item>
+      </ion-card-content>
+      <ion-item actions>
+        <button clear item-left type="button" (click)='close()'>Cancel</button>
+        <button item-right type="submit">Report Broken</button>
+      </ion-item>
+    </form>
+  </ion-card>
+
+  <ion-card *ngIf='isSuccessful'>
+    <ion-card-header>Thank you!</ion-card-header>
+    <ion-card-content>We appreciate your help tracking our bikes.</ion-card-content>
+    <ion-item actions>
+      <button item-right (click)='close()'>Close</button>
+    </ion-item>
+  </ion-card>
+
 </ion-content>

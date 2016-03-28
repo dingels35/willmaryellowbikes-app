@@ -61,4 +61,13 @@ export class StatusService extends BaseService {
     return this.where({ bike_rack_id: bikeRackId, limit: 10, scope: 'bike_count' })
   }
 
+  public reportAbandoned = (bikeId?: number, locationDescription?: string, latitude?: number, longitude?: number) => {
+    let status = new Status({type: 'AbandonedStatus', bike_id: bikeId, location_description: locationDescription, latitude: latitude, longitude: longitude});
+    return this.create(status);
+  }
+  public reportBroken = (bikeRackId: number, bikeId: number, brokenDescription: string) => {
+    let status = new Status({type: 'BrokenStatus', bike_rack_id: bikeRackId, bike_id: bikeId, broken_description: brokenDescription});
+    return this.create(status);
+  }
+
 }
