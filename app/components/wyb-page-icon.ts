@@ -9,9 +9,11 @@ import {IONIC_DIRECTIVES} from 'ionic-angular';
   template: `
     <ion-card class='page-icon'>
       <ion-card-content style="text-align: center;">
-        <i class="wybicon {{ icon }}" style='font-size: 20vw;'></i>
-        <br /><br />
-        <ng-content></ng-content>
+        <a class='icon-link'>
+          <i class="wybicon {{ icon }}" style='font-size: 20vw;'></i>
+          <br /><br />
+          <ng-content></ng-content>
+        </a>
       </ion-card-content>
     </ion-card>
   `

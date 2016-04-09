@@ -109,7 +109,7 @@ export class AdoptRackPage {
   }
 
   getRackHistory(rackId: number) {
-    // this.statusHistory = null;
+    this.statusHistory = null;
     this.statusHistoryLoading = true;
     this.statusService.bikeCountHistory(rackId).subscribe(
       resp => success(resp, this),

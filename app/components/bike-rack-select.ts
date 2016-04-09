@@ -57,7 +57,7 @@ export class BikeRackSelect {
     let _this = this;
 
     this.gpsService.promise.then(function() {
-      if (!_this.hasValue()) {
+      if (_this.gpsService.hasLocation && !_this.hasValue()) {
         _this.bikeRackService.closest(_this.gpsService.latitude, _this.gpsService.longitude).subscribe(
           (res) => { if (!_this.hasValue()) _this.value = res.id; },
           (err) => { console.log(err); },

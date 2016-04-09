@@ -17,7 +17,7 @@ export class AuthorizationService {
       { title: 'Adopt a Rack',      component: 'AdoptRackPage',       icon: 'wybicon-bicycle-parked' }
     ];
     this.preLoginPages = [
-      { title: 'Log In',            component: 'LogInPage',           icon: 'wybicon-cyclist-helmet' },
+      // { title: 'Log In',            component: 'LogInPage',           icon: 'wybicon-cyclist-helmet' },
     ]
 
     this.setActivePages();
