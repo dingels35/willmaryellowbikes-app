@@ -1,0 +1,15 @@
+<wyb-navbar>Willmar Yellow Bikes</wyb-navbar>
+
+<ion-content padding class="admin-bikes">
+
+<ion-list>
+  <button ion-item *ngFor="#b of bikes">
+    {{ b.identifier }}
+    <span *ngIf='b.description'>{{ b.description }}</span>
+    <ion-badge *ngIf='b.broken' item-right>broken</ion-badge>
+    <ion-badge *ngIf='b.abandoned' item-right>abandoned</ion-badge>
+  </button>
+</ion-list>
+
+
+</ion-content>

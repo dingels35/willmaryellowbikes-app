@@ -17,6 +17,8 @@ import {AdoptRackPage} from './pages/adopt-rack/adopt-rack';
 import {ReportAbandonedPage} from './pages/report-abandoned/report-abandoned';
 import {ReportBrokenPage} from './pages/report-broken/report-broken';
 
+import {AdminBikesPage} from './pages/admin/bikes/bikes';
+
 @App({
   templateUrl: 'build/app.html',
   providers: [
@@ -42,7 +44,8 @@ class MyApp {
     'GettingStartedPage': GettingStartedPage,
     'ReportAbandonedPage': ReportAbandonedPage,
     'ReportBrokenPage': ReportBrokenPage,
-    'LogInPage': LogInPage
+    'LogInPage': LogInPage,
+    'AdminBikesPage': AdminBikesPage
   }
 
   constructor(private app: IonicApp, private platform: Platform, public authorizationService: AuthorizationService, public gpsService: GpsService) {

@@ -10,11 +10,13 @@ export class AuthorizationService {
   constructor() {
     this.pages = [
       // { title: 'Home',              component: 'GettingStartedPage' },
-      { title: 'Check Out',         component: 'CheckOutPage',        icon: 'wybicon-man-riding-a-bicycle' },
+      { title: 'Check Outx',         component: 'CheckOutPage',        icon: 'wybicon-man-riding-a-bicycle' },
       { title: 'Check In',          component: 'CheckInPage',         icon: 'wybicon-time-for-bicycle-exercise' },
       { title: 'Report Abandoned',  component: 'ReportAbandonedPage', icon: 'wybicon-bicycle-pin' },
       { title: 'Report Broken',     component: 'ReportBrokenPage',    icon: 'wybicon-bicycle-sprockets' },
-      { title: 'Adopt a Rack',      component: 'AdoptRackPage',       icon: 'wybicon-bicycle-parked' }
+      { title: 'Adopt a Rack',      component: 'AdoptRackPage',       icon: 'wybicon-bicycle-parked' },
+
+      { title: 'Bikes',             component: 'AdminBikesPage',      icon: 'wybicon-man-riding-a-bicycle' }
     ];
     this.preLoginPages = [
       // { title: 'Log In',            component: 'LogInPage',           icon: 'wybicon-cyclist-helmet' },
