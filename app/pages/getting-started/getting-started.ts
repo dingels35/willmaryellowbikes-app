@@ -1,5 +1,6 @@
-import {Page, NavController} from 'ionic-angular';
-import {Type} from 'angular2/core';
+import { NavController} from 'ionic-angular';
+import { Component, Type } from '@angular/core';
+
 import {WybNavbar} from '../../components/wyb-navbar';
 import {WybPageIcon} from '../../components/wyb-page-icon';
 
@@ -12,7 +13,7 @@ import {ReportBrokenPage} from '../report-broken/report-broken';
 
 import {AuthorizationService} from '../../services/authorization-service'
 
-@Page({
+@Component({
   templateUrl: 'build/pages/getting-started/getting-started.html',
   providers: [AuthorizationService],
   directives: [WybNavbar, WybPageIcon]

@@ -1,5 +1,5 @@
-import {Component, Input} from 'angular2/core';
-import {NgControl} from 'angular2/common';
+import {Component, Input} from '@angular/core';
+import {NgControl} from '@angular/common';
 import {Select, Item, Label, Option} from 'ionic-angular';
 import {GpsService} from '../services/gps-service';
 import {BikeRackService} from '../services/bike-rack-service';

@@ -1,5 +1,5 @@
-import {NavController, Alert} from 'ionic-angular';
-import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
+import {NavController, AlertController} from 'ionic-angular';
+import {FormBuilder, Validators, ControlGroup} from '@angular/common';
 import {StatusService} from '../../services/status-service'
 import {Status} from '../../models/status';
 import {BikeRackSelect} from '../../components/bike-rack-select';
@@ -8,6 +8,7 @@ export class CheckInOutPage {
   // services
   nav: NavController;
   statusService: StatusService;
+  alertController: AlertController
 
   // form elements
   frm: ControlGroup;
@@ -17,10 +18,11 @@ export class CheckInOutPage {
   isSuccessful: boolean;
   type: string;
 
-  constructor(nav: NavController, fb: FormBuilder, ss:StatusService) {
+  constructor(nav: NavController, fb: FormBuilder, ss:StatusService, ac:AlertController) {
     // save instances to object
     this.nav = nav;
     this.statusService = ss;
+    this.alertController = ac;
 
     // initialize variables
     this.isSubmitting = false;
@@ -48,7 +50,7 @@ export class CheckInOutPage {
 
     // show alert if errors exist
     if (!this.frm.valid) {
-      if (this.bikeRackIdErrors().required) {
+      if (this.bikeRackIdErrors()['required']) {
         this.showError('You must select a bike rack.');
       }
       return;
@@ -93,20 +95,20 @@ export class CheckInOutPage {
   }
 
   bikeRackIdErrors() {
-    return this.frm.controls.bikeRackId.errors || {};
+    return this.frm.controls['bikeRackId'].errors || {};
   }
 
   inOrOutErrors() {
-    return this.frm.controls.inOrOut.errors || {};
+    return this.frm.controls['inOrOut'].errors || {};
   }
 
   showError(message: string) {
-    let alert = Alert.create({
+    let alert = this.alertController.create({
       title: 'Validation error',
       subTitle: message,
       buttons: ['Close']
     });
-    this.nav.present(alert);
+    alert.present();
   }
 
 }

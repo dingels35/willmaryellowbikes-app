@@ -2,7 +2,7 @@
 <ion-content padding class="getting-started">
 
   <ion-card *ngIf='!isSuccessful'>
-    <form [ngFormModel]="frm" (submit)="save($event)">
+    <form [formGroup]="frm" (submit)="save($event)">
       <ion-card-content>
         <p>Reporting bikes in need of repair helps us keep the bikes usable. Please select options
            below and click "REPORT BROKEN". If the broken bike is not at a rack, please use the

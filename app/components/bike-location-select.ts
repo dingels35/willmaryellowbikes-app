@@ -1,5 +1,5 @@
-import {Component, Input} from 'angular2/core';
-import {NgControl} from 'angular2/common';
+import {Component, Input} from '@angular/core';
+import {NgControl} from '@angular/forms';
 import {Select, Item, Label, Option} from 'ionic-angular';
 
 @Component({
@@ -23,6 +23,7 @@ export class BikeLocationSelect {
   set value(val) { this._value = val; this.onChange(val); }
 
   constructor(ngControl: NgControl) {
+
     if (ngControl) { ngControl.valueAccessor = this; }
 
     this.locations = [

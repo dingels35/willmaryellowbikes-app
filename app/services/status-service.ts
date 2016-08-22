@@ -1,5 +1,5 @@
-import {Injectable} from 'angular2/core';
-import {Headers, URLSearchParams} from 'angular2/http';
+import {Injectable} from '@angular/core';
+import {Headers, URLSearchParams, RequestOptionsArgs} from '@angular/http';
 import {AuthHttp} from '../vendor/angular2-jwt/angular2-jwt';
 import {BaseService} from './base-service';
 import {Status} from '../models/status';
@@ -24,12 +24,13 @@ export class StatusService extends BaseService {
 
   private where = (qs: any) => {
     let headers = new Headers({'Content-Type': 'application/json'});
-    let params = new URLSearchParams();
-    for (var key in qs) {
-      params.set(key, qs[key]);
-    }
+    // let params = new URLSearchParams();
+    // for (var key in qs) {
+    //   params.set(key, qs[key]);
+    // }
 
-    return this.http.get(this.url + 'statuses', { headers: headers, search: params })
+
+    return this.http.get(this.url + 'statuses', { headers: headers, search: qs })
       .map(res => res.json().statuses)
       .map((statuses: Array<any>) => {
         let result:Array<Status> = [];

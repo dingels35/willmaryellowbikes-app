@@ -1,7 +1,7 @@
 /* angular2-moment (c) 2015, 2016 Uri Shaked / MIT Licence */
 
-import {Pipe, ChangeDetectorRef, PipeTransform, EventEmitter, OnDestroy} from 'angular2/core';
-import * as moment from './moment';
+import {Pipe, ChangeDetectorRef, PipeTransform, EventEmitter, OnDestroy} from '@angular/core';
+import * as moment from 'moment';
 
 // under systemjs, moment is actually exported as the default export, so we account for that
 const momentConstructor: (value?: any) => moment.Moment = (<any>moment).default || moment;
@@ -29,7 +29,7 @@ export class CalendarPipe implements PipeTransform, OnDestroy {
     CalendarPipe._midnight.subscribe(() => this._cdRef.markForCheck());
   }
 
-  transform(value: Date | moment.Moment, args?: any[]): any {
+  transform(value: Date | moment.Moment, ...args: any[]): any {
     return momentConstructor(value).calendar();
   }
 
@@ -46,7 +46,7 @@ export class CalendarPipe implements PipeTransform, OnDestroy {
   private static _initTimer() {
     // initialize the timer
     if (!CalendarPipe._midnight) {
-      CalendarPipe._midnight = new EventEmitter();
+      CalendarPipe._midnight = new EventEmitter<Date>();
       let timeToUpdate = CalendarPipe._getMillisecondsUntilUpdate();
       CalendarPipe._timer = window.setTimeout(() => {
         // emit the current date

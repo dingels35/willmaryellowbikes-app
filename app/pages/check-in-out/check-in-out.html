@@ -4,7 +4,7 @@
 
 
   <ion-card *ngIf='!isSuccessful'>
-    <form [ngFormModel]="frm" (submit)="save($event)">
+    <form [formGroup]="frm" (submit)="save($event)">
 
       <ion-card-content>
         <p>Checking bikes {{ typeText() | lowercase }} helps us track where our bikes are.  Please select options below and click "CHECK {{ typeText() | uppercase }}".</p>

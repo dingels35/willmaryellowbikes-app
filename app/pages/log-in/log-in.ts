@@ -1,18 +1,19 @@
-import {Page, NavController} from 'ionic-angular';
-import {NgZone} from 'angular2/core';
+import {NavController} from 'ionic-angular';
+import { Component } from '@angular/core';
+import {NgZone} from '@angular/core';
 import {WybNavbar} from '../../components/wyb-navbar';
 import {AuthorizationService} from '../../services/authorization-service'
 
-declare var Auth0Lock: any;
+declare var Auth0Lock;
 
-@Page({
+@Component({
   templateUrl: 'build/pages/log-in/log-in.html',
   providers: [AuthorizationService],
   directives: [WybNavbar]
 })
 export class LogInPage {
-  lock: Auth0Lock = new Auth0Lock('nlCX5QpwjRbWT5ATwDigu0kwsTikjha0', 'willmaryellowbikes.auth0.com');
-  public hasLoggedIn: boolean = false;
+  lock = new Auth0Lock('nlCX5QpwjRbWT5ATwDigu0kwsTikjha0', 'willmaryellowbikes.auth0.com');
+  public hasLoggedIn:boolean = false;
 
   constructor(public auth: AuthorizationService, public nav: NavController, private _ngZone: NgZone) {
     this.hasLoggedIn = auth.isAuthenticated();

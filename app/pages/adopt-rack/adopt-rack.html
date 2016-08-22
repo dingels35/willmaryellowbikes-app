@@ -3,7 +3,7 @@
 <ion-content padding class="adopt-rack">
 
   <ion-card *ngIf='!isSuccessful'>
-    <form [ngFormModel]="frm" (submit)="save($event)">
+    <form [formGroup]="frm" (submit)="save($event)">
 
       <ion-card-content>
         <p>Help us keep track of where the bikes are by reporting the number of bikes in a rack.</p>

@@ -1,4 +1,4 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 import {AuthHttp} from '../vendor/angular2-jwt/angular2-jwt';
 import {BikeRack} from '../models/bike-rack';
 import {BaseService} from './base-service';
