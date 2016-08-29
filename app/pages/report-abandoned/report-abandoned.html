@@ -9,8 +9,13 @@
           Please select options below and click "REPORT ABANDONED".
         </p>
 
-        <bike-location-select ngControl='location'></bike-location-select>
-      </ion-card-content>
+        <bike-location-select formControlName='location'></bike-location-select>
+
+        <ion-item *ngIf="frm.controls.location.value === 'somewhereelse'">
+          <ion-textarea formControlName="locationDescription" placeholder="Decribe where bike is located"></ion-textarea>
+        </ion-item>
+        <bike-select formControlName='bikeId'></bike-select>
+       </ion-card-content>
       <ion-item actions>
         <button clear item-left type="button" (click)='close()'>Cancel</button>
         <button item-right type="submit">Report Abandoned</button>

@@ -12,7 +12,7 @@ import {ReportAbandonedPage} from '../report-abandoned/report-abandoned';
 
 @Component({
   templateUrl: 'build/pages/report-broken/report-broken.html',
-  providers: [StatusService],
+  providers: [StatusService, ReportAbandonedPage],
   directives: [BikeRackSelect, BikeSelect, WybNavbar]
 })
 export class ReportBrokenPage {

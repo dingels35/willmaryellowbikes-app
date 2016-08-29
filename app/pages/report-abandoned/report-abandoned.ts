@@ -1,7 +1,7 @@
-import {ControlGroup} from '@angular/common';
-import {FormBuilder, Validators, FORM_PROVIDERS, FormGroup} from '@angular/forms';
+import {Component} from '@angular/core';
+import {NgForm} from '@angular/common';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NavController, AlertController} from 'ionic-angular';
-import { Component } from '@angular/core';
 
 import {BikeLocationSelect} from '../../components/bike-location-select';
 import {BikeSelect} from '../../components/bike-select';
@@ -12,7 +12,7 @@ import {WybNavbar} from '../../components/wyb-navbar';
 
 @Component({
   templateUrl: 'build/pages/report-abandoned/report-abandoned.html',
-  providers: [StatusService, FORM_PROVIDERS],
+  providers: [StatusService],
   directives: [BikeLocationSelect, BikeSelect, WybNavbar]
 })
 export class ReportAbandonedPage {
@@ -20,7 +20,7 @@ export class ReportAbandonedPage {
   gpsService: GpsService;
   nav: NavController;
   statusService: StatusService;
-  alertController: AlertController
+  alertController: AlertController;
 
   // form elements
   frm: FormGroup;
@@ -59,7 +59,7 @@ export class ReportAbandonedPage {
 
     // show alert if errors exist
     if (this.locationErrors()['required']) {
-      return this.showError('You must select a location.');
+      return this.showError('Youx must select a location.');
     } else {
       if (this.frm.controls['location'].value === 'somewhereelse' && !this.frm.controls['locationDescription'].value) {
         return this.showError('You must describe where the bike is located.');

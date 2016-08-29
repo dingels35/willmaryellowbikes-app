@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {NgControl} from '@angular/common';
+import {Component, Input, forwardRef} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Select, Item, Label, Option} from 'ionic-angular';
 import {GpsService} from '../services/gps-service';
 import {BikeRackService} from '../services/bike-rack-service';
@@ -8,17 +8,24 @@ import {BikeRack} from '../models/bike-rack';
 @Component({
   selector: 'bike-rack-select',
   directives: [Select, Item, Label, Option],
-  providers: [BikeRackService],
+  providers: [
+    BikeRackService,
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => BikeRackSelect),
+      multi: true
+    }
+  ],
   template: `
     <ion-item>
       <ion-label>* {{ label }}</ion-label>
-      <ion-select [(ngModel)]="_value" (change)='onChange(value)' [disabled]='isLoadingBikeRacks || isLoadingNearest'>
-        <ion-option *ngFor='#br of bikeRacks' [value]='br.id'>{{br.name}}</ion-option>
+      <ion-select [(ngModel)]="value" (change)='onChange(value)' [disabled]='isLoadingBikeRacks || isLoadingNearest'>
+        <ion-option *ngFor='let br of bikeRacks' [value]='br.id'>{{br.name}}</ion-option>
       </ion-select>
     </ion-item>
   `
 })
-export class BikeRackSelect {
+export class BikeRackSelect implements ControlValueAccessor {
   bikeRacks: Array<BikeRack>;
   bikeRackService: BikeRackService;
   gpsService: GpsService;
@@ -31,8 +38,7 @@ export class BikeRackSelect {
   get value() { return this._value; }
   set value(val) { this._value = val; this.onChange(val); }
 
-  constructor(brs: BikeRackService, ngControl: NgControl, gps: GpsService) {
-    if (ngControl) { ngControl.valueAccessor = this; }
+  constructor(brs: BikeRackService, gps: GpsService) {
 
     this.bikeRackService = brs;
     this.gpsService = gps;
@@ -86,10 +92,10 @@ export class BikeRackSelect {
   }
 
   // functions to implement ngControl
-  onChange(val) {}
-  onTouched(val) {}
+  private onChange(val) {}
+  private onTouched(val) {}
   writeValue(val) { this._value = val; }
-  registerOnChange(fn) { this.onChange = fn; }
+  registerOnChange(fn) { this.onChange = fn; console.log("hi"); }
   registerOnTouched(fn) { this.onTouched = fn; }
 
 }

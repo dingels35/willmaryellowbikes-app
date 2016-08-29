@@ -7,10 +7,10 @@
 
       <ion-card-content>
         <p>Help us keep track of where the bikes are by reporting the number of bikes in a rack.</p>
-        <bike-rack-select ngControl='bikeRackId' [ng-change]="onBikeRackIdChange()"></bike-rack-select>
+        <bike-rack-select ngFormControl='bikeRackId' (registerOnChange)="onBikeRackIdChange()"></bike-rack-select>
         <ion-item>
           <ion-label floating>Bike count</ion-label>
-          <ion-input type="tel" ngControl='bikeCount'></ion-input>
+          <ion-input type="tel" ngFormControl='bikeCount'></ion-input>
         </ion-item>
       </ion-card-content>
 
@@ -36,7 +36,7 @@
     <ion-card-content *ngIf='!frm.controls.bikeRackId.value' text-center><i>Select a rack above</i></ion-card-content>
     <ion-card-content *ngIf='frm.controls.bikeRackId.value && statusHistory && statusHistory.length == 0'>No history</ion-card-content>
     <ion-list *ngIf='statusHistory'>
-      <ion-item *ngFor='#status of statusHistory'>
+      <ion-item *ngFor='let status of statusHistory'>
         <h3>{{ status.created_at | amCalendar }}</h3>
         <h3 item-right>{{ status.bike_count }}</h3>
       </ion-item>
