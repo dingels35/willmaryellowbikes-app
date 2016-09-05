@@ -30,8 +30,8 @@ export class BikeSelect implements ControlValueAccessor {
 
   protected _value: number;
   @Input()
-  get value() { console.log("get", this._value); return this._value; }
-  set value(val) { this._value = val; this.onChange(val); console.log("set", val); }
+  get value() { return this._value; }
+  set value(val) { this._value = val; this.onChange(val); }
 
   constructor(bs: BikeService) {
     this.bikeService = bs;

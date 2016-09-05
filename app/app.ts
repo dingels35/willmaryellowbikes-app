@@ -44,7 +44,6 @@ class MyApp {
   }
 
   constructor(public platform: Platform, public authorizationService: AuthorizationService, public gpsService: GpsService) {
-    console.log("I AM HERE");
     this.initializeApp();
   }
 

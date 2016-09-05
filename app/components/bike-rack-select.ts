@@ -1,4 +1,4 @@
-import {Component, Input, forwardRef} from '@angular/core';
+import {Component, Input, Output, forwardRef, EventEmitter} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Select, Item, Label, Option} from 'ionic-angular';
 import {GpsService} from '../services/gps-service';
@@ -36,7 +36,14 @@ export class BikeRackSelect implements ControlValueAccessor {
   protected _value: number;
   @Input()
   get value() { return this._value; }
-  set value(val) { this._value = val; this.onChange(val); }
+  set value(val) {
+    this._value = val;
+    this.onChange(val);
+    this.bikeRackChange.emit(this);
+}
+
+  @Output()
+  bikeRackChange: EventEmitter<BikeRackSelect> = new EventEmitter<BikeRackSelect>();
 
   constructor(brs: BikeRackService, gps: GpsService) {
 
@@ -95,7 +102,7 @@ export class BikeRackSelect implements ControlValueAccessor {
   private onChange(val) {}
   private onTouched(val) {}
   writeValue(val) { this._value = val; }
-  registerOnChange(fn) { this.onChange = fn; console.log("hi"); }
+  registerOnChange(fn) { this.onChange = fn; }
   registerOnTouched(fn) { this.onTouched = fn; }
 
 }

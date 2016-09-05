@@ -69,7 +69,6 @@ export class ReportBrokenPage {
     return this.doReportBroken();
   }
 
-
   //////// helper functions ////////
 
   doReportBroken() {

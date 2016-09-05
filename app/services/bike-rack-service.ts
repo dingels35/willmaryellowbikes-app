@@ -35,12 +35,6 @@ export class BikeRackService extends BaseService {
   }
 
   closest(lat: number, long: number) {
-    // console.log('closest');
-    // console.log(lat);
-    // console.log(long);
-    // lat = 52.7103801338951;
-    // long = 6.20107965897916;
-    // console.log("closest", lat, long)
     return this.http.get(this.url + 'bike_racks/closest?lat=' + lat + '&long=' + long)
       .map(res => res.json().bike_rack)
       .map((bikeRack: any) => {

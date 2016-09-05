@@ -24,13 +24,12 @@ export class StatusService extends BaseService {
 
   private where = (qs: any) => {
     let headers = new Headers({'Content-Type': 'application/json'});
-    // let params = new URLSearchParams();
-    // for (var key in qs) {
-    //   params.set(key, qs[key]);
-    // }
+    let params = new URLSearchParams();
+    for (var key in qs) {
+      params.set(key, qs[key]);
+    }
 
-
-    return this.http.get(this.url + 'statuses', { headers: headers, search: qs })
+    return this.http.get(this.url + 'statuses', { headers: headers, search: params })
       .map(res => res.json().statuses)
       .map((statuses: Array<any>) => {
         let result:Array<Status> = [];
@@ -59,7 +58,7 @@ export class StatusService extends BaseService {
   }
 
   public bikeCountHistory = (bikeRackId: number) => {
-    return this.where({ bike_rack_id: bikeRackId, limit: 10, scope: 'bike_count' })
+    return this.where({ type: 'BikeCountStatus', bike_rack_id: bikeRackId, limit: 10 })
   }
 
   public reportAbandoned = (bikeId?: number, locationDescription?: string, latitude?: number, longitude?: number) => {

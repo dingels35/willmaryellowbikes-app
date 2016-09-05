@@ -26,8 +26,8 @@ export class BikeLocationSelect implements ControlValueAccessor  {
 
   protected _value: string;
   @Input()
-  get value() { console.log("get2", this._value); return this._value; }
-  set value(val) { this._value = val; this.onChange(val); console.log("set2", val); }
+  get value() { return this._value; }
+  set value(val) { this._value = val; this.onChange(val); }
 
   constructor() {
 

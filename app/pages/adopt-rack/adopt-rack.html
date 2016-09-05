@@ -7,10 +7,10 @@
 
       <ion-card-content>
         <p>Help us keep track of where the bikes are by reporting the number of bikes in a rack.</p>
-        <bike-rack-select ngFormControl='bikeRackId' (registerOnChange)="onBikeRackIdChange()"></bike-rack-select>
+        <bike-rack-select formControlName='bikeRackId' (bikeRackChange)="onBikeRackChange($event)"></bike-rack-select>
         <ion-item>
           <ion-label floating>Bike count</ion-label>
-          <ion-input type="tel" ngFormControl='bikeCount'></ion-input>
+          <ion-input type="tel" formControlName='bikeCount'></ion-input>
         </ion-item>
       </ion-card-content>
 

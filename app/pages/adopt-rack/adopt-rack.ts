@@ -49,19 +49,7 @@ export class AdoptRackPage {
       bikeRackId: [null, Validators.required],
       bikeCount: [null, Validators.required]
     });
-
-    console.log("this hodul show up");
-    this.frm.controls['bikeRackId'].valueChanges.subscribe(data => {
-      console.log("aldfjafjadf");
-      console.log(data);
-    });
-    this.frm.valueChanges.subscribe(data => {
-      console.log("XXXXXX");
-      console.log(data);
-    });
-
   }
-
 
   close(event) {
     this.nav.pop();
@@ -121,7 +109,6 @@ export class AdoptRackPage {
   }
 
   getRackHistory(rackId: number) {
-    console.log("getRackHistory()!!");
     this.statusHistory = null;
     this.statusHistoryLoading = true;
     this.statusService.bikeCountHistory(rackId).subscribe(
@@ -143,13 +130,11 @@ export class AdoptRackPage {
     }
   }
 
-  onBikeRackIdChange() {
-    console.log('onBikeRackIdChange');
-    if (this.frm.controls['bikeRackId'].value && this.frm.controls['bikeRackId'].value != this.statusHistoryBikeRackId  ) {
-      this.statusHistoryBikeRackId = this.frm.controls['bikeRackId'].value
+  onBikeRackChange(brs:BikeRackSelect) {
+    if (brs.value && brs.value != this.statusHistoryBikeRackId  ) {
+      this.statusHistoryBikeRackId = brs.value
       this.getRackHistory(this.statusHistoryBikeRackId);
     }
-
   }
 
   showError(message: string) {
