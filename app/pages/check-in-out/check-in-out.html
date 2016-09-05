@@ -4,12 +4,12 @@
 
 
   <ion-card *ngIf='!isSuccessful'>
-    <form [ngFormModel]="frm" (submit)="save($event)">
+    <form [formGroup]="frm" (submit)="save($event)">
 
       <ion-card-content>
         <p>Checking bikes {{ typeText() | lowercase }} helps us track where our bikes are.  Please select options below and click "CHECK {{ typeText() | uppercase }}".</p>
-        <bike-rack-select ngControl='bikeRackId'></bike-rack-select>
-        <bike-select ngControl='bikeId'></bike-select>
+        <bike-rack-select formControlName='bikeRackId'></bike-rack-select>
+        <bike-select formControlName='bikeId'></bike-select>
       </ion-card-content>
 
       <ion-item actions>

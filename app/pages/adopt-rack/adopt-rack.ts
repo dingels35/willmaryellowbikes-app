@@ -1,14 +1,14 @@
-import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
-import {ChangeDetectorRef} from 'angular2/core';
+import {FormBuilder, Validators, ControlGroup} from '@angular/common';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import {CalendarPipe} from '../../vendor/angular2-moment/CalendarPipe';
-import {Page, NavController, Alert} from 'ionic-angular';
+import {NavController, AlertController} from 'ionic-angular';
 
 import {BikeRackSelect} from '../../components/bike-rack-select';
 import {WybNavbar} from '../../components/wyb-navbar';
 import {Status} from '../../models/status'
 import {StatusService} from '../../services/status-service'
 
-@Page({
+@Component({
   templateUrl: 'build/pages/adopt-rack/adopt-rack.html',
   providers: [StatusService],
   directives: [BikeRackSelect, WybNavbar],
@@ -19,6 +19,7 @@ export class AdoptRackPage {
   nav: NavController;
   statusService: StatusService;
   cdr: ChangeDetectorRef;
+  alertController: AlertController;
 
   // form elements
   frm: ControlGroup;
@@ -32,11 +33,12 @@ export class AdoptRackPage {
   statusHistoryBikeRackId: number;
   statusHistoryLoading: boolean;
 
-  constructor(nav: NavController, fb: FormBuilder, ss:StatusService, cdr: ChangeDetectorRef) {
+  constructor(nav: NavController, fb: FormBuilder, ss:StatusService, cdr: ChangeDetectorRef, ac: AlertController) {
     // save instances to object
     this.nav = nav;
     this.statusService = ss;
     this.cdr = cdr;
+    this.alertController = ac;
 
     // initialize variables
     this.isSubmitting = false;
@@ -47,9 +49,7 @@ export class AdoptRackPage {
       bikeRackId: [null, Validators.required],
       bikeCount: [null, Validators.required]
     });
-
   }
-
 
   close(event) {
     this.nav.pop();
@@ -60,10 +60,10 @@ export class AdoptRackPage {
 
     // show alert if errors exist
     if (!this.frm.valid) {
-      if (this.bikeRackIdErrors().required) {
+      if (this.bikeRackIdErrors()['required']) {
         this.showError('You must select a bike rack.');
       }
-      if (this.bikeCountErrors().required) {
+      if (this.bikeCountErrors()['required']) {
         this.showError('You must enter the number of bikes.');
       }
       return;
@@ -130,21 +130,20 @@ export class AdoptRackPage {
     }
   }
 
-  onBikeRackIdChange() {
-    if (this.frm.controls['bikeRackId'].value && this.frm.controls['bikeRackId'].value != this.statusHistoryBikeRackId  ) {
-      this.statusHistoryBikeRackId = this.frm.controls['bikeRackId'].value
+  onBikeRackChange(brs:BikeRackSelect) {
+    if (brs.value && brs.value != this.statusHistoryBikeRackId  ) {
+      this.statusHistoryBikeRackId = brs.value
       this.getRackHistory(this.statusHistoryBikeRackId);
     }
-
   }
 
   showError(message: string) {
-    let alert = Alert.create({
+    let alert = this.alertController.create({
       title: 'Validation error',
       subTitle: message,
       buttons: ['Close']
     });
-    this.nav.present(alert);
+    alert.present(alert);
   }
 
 

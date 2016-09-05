@@ -1,5 +1,5 @@
-import {Component, Input} from 'angular2/core';
-import {NgControl} from 'angular2/common';
+import {Component, Input, forwardRef} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Select, Item, Label, Option} from 'ionic-angular';
 import {BikeService} from '../services/bike-service';
 import {Bike} from '../models/bike';
@@ -7,17 +7,24 @@ import {Bike} from '../models/bike';
 @Component({
   selector: 'bike-select',
   directives: [Select, Item, Label, Option],
-  providers: [BikeService],
+  providers: [
+    BikeService,
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => BikeSelect),
+      multi: true
+    }
+  ],
   template: `
     <ion-item>
       <ion-label>Select a bike</ion-label>
-      <ion-select [(ngModel)]="_value" (change)='onChange(value)'>
-        <ion-option *ngFor='#b of bikes' [value]='b.id'>{{b.identifier}}</ion-option>
+      <ion-select [(ngModel)]="value" (change)='onChange(value)'>
+        <ion-option *ngFor='let b of bikes' [value]='b.id'>{{b.identifier}}</ion-option>
       </ion-select>
     </ion-item>
   `
 })
-export class BikeSelect {
+export class BikeSelect implements ControlValueAccessor {
   bikes: Array<Bike>;
   bikeService: BikeService;
 
@@ -26,9 +33,7 @@ export class BikeSelect {
   get value() { return this._value; }
   set value(val) { this._value = val; this.onChange(val); }
 
-  constructor(bs: BikeService, ngControl: NgControl) {
-    if (ngControl) { ngControl.valueAccessor = this; }
-
+  constructor(bs: BikeService) {
     this.bikeService = bs;
     this.loadBikes();
   }
@@ -37,7 +42,7 @@ export class BikeSelect {
     this.bikeService.all().subscribe(res => this.bikes = res);
   }
 
-  // functions to implement ngControl
+  // functions to implement ControlValueAccessor
   onChange(val) {}
   onTouched(val) {}
   writeValue(val) { this._value = val; }

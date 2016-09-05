@@ -1,29 +1,35 @@
-import {Component, Input} from 'angular2/core';
-import {NgControl} from 'angular2/common';
+import {Component, Input, forwardRef} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Select, Item, Label, Option} from 'ionic-angular';
 
 @Component({
   selector: 'bike-location-select',
   directives: [Select, Item, Label, Option],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => BikeLocationSelect),
+      multi: true
+    }
+  ],
   template: `
     <ion-item>
       <ion-label>* Where is the bike?</ion-label>
-      <ion-select [(ngModel)]="_value" (change)='onChange(value)'>
-        <ion-option *ngFor='#l of locations' [value]='l.value'>{{ l.text }}</ion-option>
+      <ion-select [(ngModel)]="value" (change)='onChange(value)'>
+        <ion-option *ngFor='let l of locations' [value]='l.value'>{{ l.text }}</ion-option>
       </ion-select>
     </ion-item>
   `
 })
-export class BikeLocationSelect {
+export class BikeLocationSelect implements ControlValueAccessor  {
   locations: Array<{}>;
 
-  protected _value: number;
+  protected _value: string;
   @Input()
   get value() { return this._value; }
   set value(val) { this._value = val; this.onChange(val); }
 
-  constructor(ngControl: NgControl) {
-    if (ngControl) { ngControl.valueAccessor = this; }
+  constructor() {
 
     this.locations = [
       // { value: 'inarack',          text: 'In a rack' },
@@ -33,12 +39,11 @@ export class BikeLocationSelect {
 
   }
 
-  private hasValue() { return (this.value) ? true : false; }
+  // private hasValue() { return (this.value) ? true : false; }
 
-
-  // functions to implement ngControl
-  onChange(val) {}
-  onTouched(val) {}
+  // functions to implement ControlValueAccessor
+  private onChange(val) {}
+  private onTouched(val) {}
   writeValue(val) { this._value = val; }
   registerOnChange(fn) { this.onChange = fn; }
   registerOnTouched(fn) { this.onTouched = fn; }

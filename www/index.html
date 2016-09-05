@@ -7,7 +7,9 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
 
+<!--
   <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src &apos;self&apos; &apos;unsafe-inline&apos;; script-src &apos;self&apos; &apos;unsafe-inline&apos; &apos;unsafe-eval&apos; https://cdn.auth0.com https://willmaryellowbikes.auth0.com">
+-->
 
   <link ios-href="build/css/app.ios.css" rel="stylesheet">
   <link md-href="build/css/app.md.css" rel="stylesheet">
@@ -17,8 +19,13 @@
 
   <ion-app></ion-app>
 
+  <!-- cordova.js required for cordova apps -->
   <script src="cordova.js"></script>
-  <script src="build/js/angular2-polyfills.js"></script>
+  <!-- Polyfill needed for platforms without Promise and Collection support -->
+  <script src="build/js/es6-shim.min.js"></script>
+  <!-- Zone.js and Reflect-metadata  -->
+  <script src="build/js/Reflect.js"></script>
+  <script src="build/js/zone.js"></script>
   <script src="lock-7.9.min.js"></script>
   <script src="build/js/app.bundle.js"></script>
 </body>

@@ -2,15 +2,15 @@
 <ion-content padding class="getting-started">
 
   <ion-card *ngIf='!isSuccessful'>
-    <form [ngFormModel]="frm" (submit)="save($event)">
+    <form [formGroup]="frm" (submit)="save($event)">
       <ion-card-content>
         <p>Reporting bikes in need of repair helps us keep the bikes usable. Please select options
            below and click "REPORT BROKEN". If the broken bike is not at a rack, please use the
            <a (click)="goTo(reportAbandonedPage)">Report Abandoned</a> page.</p>
-        <bike-rack-select ngControl='bikeRackId'></bike-rack-select>
-        <bike-select ngControl='bikeId'></bike-select>
+        <bike-rack-select formControlName='bikeRackId'></bike-rack-select>
+        <bike-select formControlName='bikeId'></bike-select>
         <ion-item>
-          <ion-textarea ngControl="brokenDescription" placeholder="What seems to be the problem?"></ion-textarea>
+          <ion-textarea formControlName="brokenDescription" placeholder="What seems to be the problem?"></ion-textarea>
         </ion-item>
       </ion-card-content>
       <ion-item actions>

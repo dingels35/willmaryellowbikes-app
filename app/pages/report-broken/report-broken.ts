@@ -1,5 +1,6 @@
-import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
-import {Page, NavController, Alert} from 'ionic-angular';
+import {FormBuilder, Validators, ControlGroup} from '@angular/common';
+import { NavController, AlertController} from 'ionic-angular';
+import { Component } from '@angular/core';
 
 import {BikeRackSelect} from '../../components/bike-rack-select';
 import {BikeSelect} from '../../components/bike-select';
@@ -9,15 +10,16 @@ import {WybNavbar} from '../../components/wyb-navbar';
 import {ReportAbandonedPage} from '../report-abandoned/report-abandoned';
 
 
-@Page({
+@Component({
   templateUrl: 'build/pages/report-broken/report-broken.html',
-  providers: [StatusService],
+  providers: [StatusService, ReportAbandonedPage],
   directives: [BikeRackSelect, BikeSelect, WybNavbar]
 })
 export class ReportBrokenPage {
   // services
   nav: NavController;
   statusService: StatusService;
+  alertController: AlertController
 
   // form elements
   frm: ControlGroup;
@@ -28,12 +30,13 @@ export class ReportBrokenPage {
 
   reportAbandonedPage: ReportAbandonedPage;
 
-  constructor(nav: NavController, fb: FormBuilder, ss:StatusService) {
+  constructor(nav: NavController, fb: FormBuilder, ss:StatusService, ac:AlertController, rap: ReportAbandonedPage) {
     // save instances to object
     this.nav = nav;
     this.statusService = ss;
+    this.alertController= ac;
 
-    this.reportAbandonedPage = ReportAbandonedPage;
+    this.reportAbandonedPage = rap;
 
     // initialize variables
     this.isSubmitting = false;
@@ -56,7 +59,7 @@ export class ReportBrokenPage {
 
     // show alert if errors exist
     if (!this.frm.valid) {
-      if (this.bikeRackIdErrors().required) {
+      if (this.bikeRackIdErrors()['required']) {
         this.showError('You must select a bike rack.');
       }
       return;
@@ -65,7 +68,6 @@ export class ReportBrokenPage {
     // assert no errors.  submit form results
     return this.doReportBroken();
   }
-
 
   //////// helper functions ////////
 
@@ -93,20 +95,20 @@ export class ReportBrokenPage {
   }
 
   bikeRackIdErrors() {
-    return this.frm.controls.bikeRackId.errors || {};
+    return this.frm.controls['bikeRackId'].errors || {};
   }
 
   brokenErrors() {
-    return this.frm.controls.broken.errors || {};
+    return this.frm.controls['broken'].errors || {};
   }
 
   showError(message: string) {
-    let alert = Alert.create({
+    let alert = this.alertController.create({
       title: 'Validation error',
       subTitle: message,
       buttons: ['Close']
     });
-    this.nav.present(alert);
+    alert.present();
   }
 
   goTo(page) {

@@ -1,5 +1,7 @@
-import {FormBuilder, Validators, ControlGroup} from 'angular2/common';
-import {Page, NavController, Alert} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NgForm} from '@angular/common';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {NavController, AlertController} from 'ionic-angular';
 
 import {BikeLocationSelect} from '../../components/bike-location-select';
 import {BikeSelect} from '../../components/bike-select';
@@ -8,7 +10,7 @@ import {Status} from '../../models/status';
 import {StatusService} from '../../services/status-service'
 import {WybNavbar} from '../../components/wyb-navbar';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/report-abandoned/report-abandoned.html',
   providers: [StatusService],
   directives: [BikeLocationSelect, BikeSelect, WybNavbar]
@@ -18,9 +20,10 @@ export class ReportAbandonedPage {
   gpsService: GpsService;
   nav: NavController;
   statusService: StatusService;
+  alertController: AlertController;
 
   // form elements
-  frm: ControlGroup;
+  frm: FormGroup;
 
   // status variables
   isSubmitting: boolean;
@@ -28,11 +31,12 @@ export class ReportAbandonedPage {
 
   reportAbandonedPage: ReportAbandonedPage;
 
-  constructor(nav: NavController, fb: FormBuilder, ss:StatusService, gps:GpsService) {
+  constructor(nav: NavController, fb: FormBuilder, ss:StatusService, gps:GpsService, ac:AlertController) {
     // save instances to object
     this.gpsService = gps;
     this.nav = nav;
     this.statusService = ss;
+    this.alertController = ac;
 
     // initialize variables
     this.isSubmitting = false;
@@ -54,10 +58,10 @@ export class ReportAbandonedPage {
     event.preventDefault();
 
     // show alert if errors exist
-    if (this.locationErrors().required) {
-      return this.showError('You must select a location.');
+    if (this.locationErrors()['required']) {
+      return this.showError('Youx must select a location.');
     } else {
-      if (this.frm.controls.location.value === 'somewhereelse' && !this.frm.controls.locationDescription.value) {
+      if (this.frm.controls['location'].value === 'somewhereelse' && !this.frm.controls['locationDescription'].value) {
         return this.showError('You must describe where the bike is located.');
       }
     }
@@ -95,16 +99,16 @@ export class ReportAbandonedPage {
   }
 
   locationErrors() {
-    return this.frm.controls.location.errors || {};
+    return this.frm.controls['location'].errors || {};
   }
 
   showError(message: string) {
-    let alert = Alert.create({
+    let alert = this.alertController.create({
       title: 'Validation error',
       subTitle: message,
       buttons: ['Close']
     });
-    this.nav.present(alert);
+    alert.present();
   }
 
   goTo(page) {

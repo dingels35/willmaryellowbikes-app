@@ -1,9 +1,10 @@
-/// <reference path="../node_modules/angular2/typings/browser.d.ts" />
 
-import {App, IonicApp, Platform, Config} from 'ionic-angular';
+import { Component, ViewChild, provide, Type } from '@angular/core';
+import { ionicBootstrap, Platform, Nav, Config} from 'ionic-angular';
 import {AuthHttp, AuthConfig} from './vendor/angular2-jwt/angular2-jwt';
-import {provide, Type} from 'angular2/core';
-import {Http} from 'angular2/http';
+import { StatusBar } from 'ionic-native';
+
+import { Http } from '@angular/http';
 
 import {AuthorizationService} from './services/authorization-service';
 import {GpsService} from './services/gps-service';
@@ -17,7 +18,7 @@ import {AdoptRackPage} from './pages/adopt-rack/adopt-rack';
 import {ReportAbandonedPage} from './pages/report-abandoned/report-abandoned';
 import {ReportBrokenPage} from './pages/report-broken/report-broken';
 
-@App({
+@Component({
   templateUrl: 'build/app.html',
   providers: [
     AuthorizationService,
@@ -26,15 +27,12 @@ import {ReportBrokenPage} from './pages/report-broken/report-broken';
       useFactory: (http) => new AuthHttp(new AuthConfig({noJwtError: true}), http),
       deps: [Http]
     })
-  ],
-  // Check out the config API docs for more info
-  // http://ionicframework.com/docs/v2/api/config/Config/
-  config: {
-    // mode: 'md'
-  }
+  ]
 })
 class MyApp {
-  rootPage: Type = GettingStartedPage;
+  @ViewChild(Nav) nav: Nav;
+
+  rootPage: any = GettingStartedPage;
   private pageMap = {
     'AdoptRackPage': AdoptRackPage,
     'CheckInPage': CheckInPage,
@@ -45,7 +43,7 @@ class MyApp {
     'LogInPage': LogInPage
   }
 
-  constructor(private app: IonicApp, private platform: Platform, public authorizationService: AuthorizationService, public gpsService: GpsService) {
+  constructor(public platform: Platform, public authorizationService: AuthorizationService, public gpsService: GpsService) {
     this.initializeApp();
   }
 
@@ -67,12 +65,14 @@ class MyApp {
       // For example, we might change the StatusBar color. This one below is
       // good for dark backgrounds and light text:
       // StatusBar.setStyle(StatusBar.LIGHT_CONTENT)
-
+      StatusBar.styleDefault();
     });
   }
 
   openPage(page) {
     let p = this.pageMap[page.component];
-    this.app.getComponent('nav').push(p);
+    this.nav.push(p);
   }
 }
+
+ionicBootstrap(MyApp);

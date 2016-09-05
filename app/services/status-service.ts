@@ -1,5 +1,5 @@
-import {Injectable} from 'angular2/core';
-import {Headers, URLSearchParams} from 'angular2/http';
+import {Injectable} from '@angular/core';
+import {Headers, URLSearchParams, RequestOptionsArgs} from '@angular/http';
 import {AuthHttp} from '../vendor/angular2-jwt/angular2-jwt';
 import {BaseService} from './base-service';
 import {Status} from '../models/status';
@@ -58,7 +58,7 @@ export class StatusService extends BaseService {
   }
 
   public bikeCountHistory = (bikeRackId: number) => {
-    return this.where({ bike_rack_id: bikeRackId, limit: 10, scope: 'bike_count' })
+    return this.where({ type: 'BikeCountStatus', bike_rack_id: bikeRackId, limit: 10 })
   }
 
   public reportAbandoned = (bikeId?: number, locationDescription?: string, latitude?: number, longitude?: number) => {

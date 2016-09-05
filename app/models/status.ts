@@ -28,10 +28,5 @@ export class Status {
     this.bike_count = params.bike_count;
   }
 
-  test() {
-    debugger;
-    console.log('hi');
-  }
-
 }
 
